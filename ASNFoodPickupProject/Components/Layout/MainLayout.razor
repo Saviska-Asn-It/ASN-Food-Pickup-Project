@@ -1,0 +1,71 @@
+﻿@inject NavigationManager NavigationManager
+@inherits LayoutComponentBase
+
+@* For MudBlazor *@
+@* Required *@
+<MudThemeProvider />
+<MudPopoverProvider />
+@* Needed for dialogs *@
+<MudDialogProvider />
+@* Needed for snackbars *@
+<MudSnackbarProvider />
+@* //////////////////////// *@
+
+
+<head>
+    <style>
+
+        .content {
+            margin:0;
+            padding:0;
+        }
+        body{
+            margin-top:0;
+        }
+
+        .bg-body-tertiary {
+            padding:0;
+        }
+
+    </style>
+</head>
+<nav class="navbar bg-body-tertiary ">
+    <div class="container-fluid bg-black NavigationBar">
+        <a class="navbar-brand text-white fw-bold fs-2 didact-gothic-regular" href="#">
+            <img src="https://icones.pro/wp-content/uploads/2021/04/icone-de-nourriture-jaune-symbole-png.png" alt="Logo" width="50" height="50" class="d-inline-block align-text-top">
+            <span class="text-warning">Food</span> Store
+        </a>
+    </div>
+</nav>
+<div class="page">
+
+    @if (!IsLoginPage())
+    {
+        <div class="sidebar">
+            <NavMenu />
+        </div>
+    }
+
+    <main>
+        <article class="content px-4">
+            @Body
+        </article>
+    </main>
+</div>
+
+<div id="blazor-error-ui">
+    An unhandled error has occurred.
+    <a href="" class="reload">Reload</a>
+    <a class="dismiss">🗙</a>
+</div>
+
+@code{
+    private bool IsLoginPage()
+    {
+        // Get the current URL path
+        var currentUrl = new Uri(NavigationManager.Uri).AbsolutePath;
+
+        // Check if the current URL is exactly "/"
+        return currentUrl.Equals("/", StringComparison.OrdinalIgnoreCase);
+    }
+}
