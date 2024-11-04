@@ -62,9 +62,40 @@
     </style>
 </head>
 
+<MudLayout>
+    <MudAppBar Elevation="1">
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@ToggleDrawer" />
+        <MudSpacer />
+        <div class="container-fluid bg-black NavigationBar">
+            <a class="navbar-brand text-white fw-bold fs-2 didact-gothic-regular" href="#">
+                <img src="https://icones.pro/wp-content/uploads/2021/04/icone-de-nourriture-jaune-symbole-png.png" alt="Logo" width="50" height="50" class="d-inline-block align-text-top">
+                <span class="text-warning">Food</span> Store
+            </a>
+        </div>
+    </MudAppBar>
+    <MudDrawer @bind-Open="@_open" Elevation="1">
+        <MudDrawerHeader>
+            <MudText Typo="Typo.h6">My App</MudText>
+        </MudDrawerHeader>
+        <MudNavMenu>
+            <MudNavLink Match="NavLinkMatch.All">Store</MudNavLink>
+            <MudNavLink Match="NavLinkMatch.All">Library</MudNavLink>
+            <MudNavLink Match="NavLinkMatch.All">Community</MudNavLink>
+        </MudNavMenu>
+    </MudDrawer>
+</MudLayout>
+@code {
+    private bool _open = false;
+
+    private void ToggleDrawer()
+    {
+        _open = !_open;
+    }
+}
 
 
 
+ @* New Account Form *@
 <div class="container d-flex flex-column justify-content-center align-items-center min-vh-100">
     <form class="didact-gothic-regular text-center">
         <span class="col-12 col-md-9 text-black fs-3">Create a new <span class="text-warning fw-bold">Food</span> <span class="fw-bold">Store</span> account.</span>
@@ -104,6 +135,9 @@
         <a href=""><h6>Alread have an Account ?</h6></a>
     </form>
     </div>
+
+
+@* Login Account Form *@
     <div class="container d-flex flex-column justify-content-center align-items-center min-vh-100">
         <form class="didact-gothic-regular text-center">
             <div class="col">
@@ -138,6 +172,7 @@
         </form>
     </div>
 
+@* New Account Verification Form *@
     <div class="container d-flex flex-column justify-content-center align-items-center min-vh-100">
         <form class="didact-gothic-regular text-center">
             <span class="col-12 col-md-9 text-black fs-3">Registering  your <span class="text-warning fw-bold">Food</span> <span class="fw-bold">Store</span> account.</span>
@@ -157,15 +192,22 @@
         </form>
     </div>
 
+@* Reset Password Form *@
 <div class="container d-flex flex-column justify-content-center align-items-center min-vh-100">
     <form class="didact-gothic-regular text-center">
         <span class="col-12 col-md-9 text-black fs-3">Reset your <span class="text-warning fw-bold">Food</span> <span class="fw-bold">Store</span> account password.</span>
         <div class="col">
             <br />
             <br />
-            <span class="col-12 col-md-9 text-black fs-5">Type your email address / phone number.</span>
+            <br />
+            <span class="col-12 col-md-9 text-black fs-5">Create a new password for your account.</span>
+            <br />
             <div class="col-12 fs-5 ">
-                <MudTextField @bind-Value="UsernameOrPhoneNumber" Label="Email Address or Phone Number" Variant="Variant.Outlined" Class="custom-mudtextfield"></MudTextField>
+                <MudTextField @bind-Value="Password1" Label="Type your new password" Variant="Variant.Outlined" Class="custom-mudtextfield" InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="ButtonTestclick" AdornmentAriaLabel="Show Password" />
+            </div>
+            <br />
+            <div class="col-12 fs-5 ">
+                <MudTextField @bind-Value="Password2" Label="Re-Type your new password" Variant="Variant.Outlined" Class="custom-mudtextfield" InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="ButtonTestclick" AdornmentAriaLabel="Show Password" />
             </div>
             <br />
         </div>
@@ -176,7 +218,8 @@
     </form>
 </div>
 
-<div class="container d-flex flex-column justify-content-center align-items-center min-vh-100">
+@* Reset Account password Verification Form *@
+@* <div class="container d-flex flex-column justify-content-center align-items-center min-vh-100">
     <form class="didact-gothic-regular text-center">
         <span class="col-12 col-md-9 text-black fs-3">Please confirm the process for resetting your <span class="text-warning fw-bold">Food</span> <span class="fw-bold">Store</span> account password.</span>
         <div class="col">
@@ -193,7 +236,7 @@
         <br />
         <button type="button" class="btn btn-outline-secondary col-5 fs-6 " id="CancelButton">Cancel</button>
     </form>
-</div>
+</div> *@
 
 @code {
     public string? UsernameOrPhoneNumber { get; set; }

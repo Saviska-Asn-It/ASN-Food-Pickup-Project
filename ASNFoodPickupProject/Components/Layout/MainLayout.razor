@@ -1,6 +1,7 @@
 ﻿@inject NavigationManager NavigationManager
 @inherits LayoutComponentBase
 
+
 @* For MudBlazor *@
 @* Required *@
 <MudThemeProvider />
@@ -11,8 +12,7 @@
 <MudSnackbarProvider />
 @* //////////////////////// *@
 
-
-<head>
+@* <head>
     <style>
 
         .content {
@@ -37,6 +37,10 @@
         </a>
     </div>
 </nav>
+ *@
+
+
+
 <div class="page">
 
     @if (!IsLoginPage())
