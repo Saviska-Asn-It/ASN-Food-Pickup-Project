@@ -1,0 +1,257 @@
+﻿@page "/aa"
+@rendermode InteractiveServer
+@using ASNFoodPickupProject.Models
+
+<head>
+    <style>
+        .ProfileSection {
+            margin-top: 3em;
+        }
+
+        .btn {
+            border-radius: 2em;
+        }
+
+        .btn-primary {
+            border: none;
+            background-color: black;
+        }
+
+            .btn-primary:hover {
+                background-color: dimgray;
+            }
+
+        .ProfileCard, MudTabs {
+            border: 3px solid lightgray;
+            border-radius: 2em;
+            padding:1em;
+        }
+
+        .centered-tabs {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+            .centered-tabs .mud-tab-panel {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+        .mud-ripple{
+            background-color: darkgrey;
+            border-radius:2em;
+            color:white;
+        }
+
+        .mud-ripple:hover{
+                background-color: darkgrey;
+        }
+        .mud-tab-slider-horizontal{
+            visibility:hidden;
+        }
+
+        .mud-tab-active{
+            background-color:black;
+        }
+        .mud-tab-active:hover{
+                background-color: black;
+        }
+
+        .mud-tab.mud-tab-active{
+            background-color:black;
+            color:white;
+            border:3px solid gray;
+        }
+
+        .mud-tab.mud-tab-active:hover {
+                background-color: black;
+                color: white;
+        }
+
+        .mud-tab:hover{
+            background-color: #c4c1c0;
+        }
+
+        .mud-tab:active {
+            background-color: black;
+        }
+
+        .mud-table-root .mud-table-head .mud-table-cell {
+            color: rgb(0 0 0);
+            font-weight: 900;
+            line-height: 1.5rem;
+        }
+
+        .mud-expand-panel-header {
+            background-color:black;
+            color:white;
+            margin:1em;
+            border-radius:2em;
+        }
+
+                .Mytext{
+            font-family: "Didact Gothic", sans-serif;
+        }
+    </style>
+</head>
+<br />
+<br />
+<h3 class="fw-bold text-center">Your Personal Information</h3>
+<section class="ProfileSection fs-5">
+    <div class="col">
+        <div class="d-flex justify-content-center">
+            <div class="col-lg-5 UserInfo">
+                <div class="ProfileCard mb-4 text-center">
+                    <div class="card-body">
+                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                             class="rounded-circle img-fluid" style="width: 150px;">
+                        <h5 class="my-3 fw-bold">Saviska Jayuawickrama</h5>
+                            <div class="mb-4">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col mb-4">
+                                            <MudIcon Icon="@Icons.Material.Filled.Email" /><p class="text-muted mb-0">Saviska@ASNIT.lk</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col mb-4">
+                                            <MudIcon Icon="@Icons.Material.Filled.LocalPhone" /><p class="text-muted mb-0">0755658770</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col mb-4">
+                                            <MudIcon Icon="@Icons.Material.Filled.LocationOn" /><p class="text-muted mb-0">No. 12, Kandy Road,Kandy</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <div class="d-flex justify-content-center mb-2">
+                            <button type="button" class="btn btn-primary col-5 fs-5 " id="UpdateUserInfoButton">Update</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <br />
+        <h3 class="fw-bold text-center">Your Payment Information</h3>
+        <section>
+            <div class=" py-5">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-12 col-lg-8 col-xl-6">
+                        <div class="ProfileCard ">
+                            <div class="card-body mx-1 my-2">
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        <img src="https://cdn-icons-png.flaticon.com/256/5968/5968299.png" class="fab fa-4x text-body pe-3" width="100px">
+                                    </div>
+                                    <div>
+                                        <p class="d-flex flex-column mb-0">
+                                            <b>Martina Thomas</b><span class="small text-muted">**** 8880</span>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex justify-content-end align-items-center pb-1">
+                                    <button type="button" class="btn btn-outline-secondary  fs-5 m-2" id="CancelButton">View</button>
+                                    <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg fs-5">Update</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        </div>
+
+</section>
+<br />
+<br />
+<h3 class="fw-bold text-center">Your History</h3>
+<br />
+            <MudExpansionPanel>
+    <TitleContent>
+                    <div class="d-flex">
+                <MudIcon Icon="@Icons.Material.Filled.Payments" class="mr-3"></MudIcon>
+                        <MudText Class=" fs-5 Mytext">Transaction History</MudText>
+                    </div>
+                </TitleContent>
+
+                <ChildContent>
+                <MudTable Items="@Transactions.Take(5)" Hover="true" Breakpoint="Breakpoint.Sm" LoadingProgressColor="Color.Info">
+                    <HeaderContent>
+                        <MudTh Class="table-head">Transaction ID</MudTh>
+                        <MudTh>Transaction Date</MudTh>
+                        <MudTh>Type</MudTh>
+                        <MudTh>Amount</MudTh>
+                        <MudTh>Payment Method</MudTh>
+                        <MudTh>Status</MudTh>
+                        <MudTh>Order ID</MudTh>
+                        <MudTh>Restaurant</MudTh>
+                        <MudTh>Promo Code</MudTh>
+                    </HeaderContent>
+                    <RowTemplate>
+                        <MudTd DataLabel="Transaction ID">@context.TransactionId</MudTd>
+                        <MudTd DataLabel="Transaction Date">@context.TransactionDate.ToString("yyyy-MM-dd HH:mm")</MudTd>
+                        <MudTd DataLabel="Type">@context.TransactionType</MudTd>
+                        <MudTd DataLabel="Amount">@context.Amount.ToString("C")</MudTd>
+                        <MudTd DataLabel="Payment Method">@context.PaymentMethod</MudTd>
+                        <MudTd DataLabel="Status">@context.Status</MudTd>
+                        <MudTd DataLabel="Order ID">@context.OrderId</MudTd>
+                        <MudTd DataLabel="Restaurant">@context.RestaurantName</MudTd>
+                        <MudTd DataLabel="Promo Code">@context.PromoCode</MudTd>
+                    </RowTemplate>
+                </MudTable>
+                </ChildContent>
+
+    </MudExpansionPanel>
+    <br>
+    <MudExpansionPanel>
+    <TitleContent>
+        <div class="d-flex">
+                <MudIcon Icon="@Icons.Material.Filled.Fastfood" class="mr-3"></MudIcon>
+            <MudText Class="fs-5 Mytext">Order History</MudText>
+            </div>
+        </TitleContent>
+        <ChildContent>
+            <MudTable Items="@Transactions.Take(5)" Hover="true" Breakpoint="Breakpoint.Sm" LoadingProgressColor="Color.Info">
+                <HeaderContent>
+                    <MudTh>Order ID</MudTh>
+                    <MudTh>Date</MudTh>
+                    <MudTh>Food</MudTh>
+                    <MudTh>Amount</MudTh>
+                    <MudTh>Food Name</MudTh>
+                    <MudTh>Status</MudTh>
+                    <MudTh>Restaurant</MudTh>
+                    <MudTh>Promo Code</MudTh>
+                </HeaderContent>
+                <RowTemplate>
+                    <MudTd DataLabel="Transaction ID">@context.TransactionId</MudTd>
+                    <MudTd DataLabel="Transaction Date">@context.TransactionDate.ToString("yyyy-MM-dd HH:mm")</MudTd>
+                    <MudTd DataLabel="Type">@context.TransactionType</MudTd>
+                    <MudTd DataLabel="Amount">@context.Amount.ToString("C")</MudTd>
+                    <MudTd DataLabel="Payment Method">@context.PaymentMethod</MudTd>
+                    <MudTd DataLabel="Status">@context.Status</MudTd>
+                    <MudTd DataLabel="Restaurant">@context.RestaurantName</MudTd>
+                    <MudTd DataLabel="Promo Code">@context.PromoCode</MudTd>
+                </RowTemplate>
+            </MudTable>
+        </ChildContent>
+    </MudExpansionPanel>
+
+@code {
+    private List<TransactionHistory> Transactions = new List<TransactionHistory>
+    {
+        new TransactionHistory { TransactionId = 1, TransactionDate = new DateTime(2024, 1, 15, 18, 30, 0), TransactionType = "Order", Amount = 25.50m, PaymentMethod = "Credit Card", Status = "Completed", OrderId = "ORD123456", RestaurantName = "Pizza Hut", PromoCode = "PIZZA10" },
+        new TransactionHistory { TransactionId = 2, TransactionDate = new DateTime(2024, 1, 16, 14, 00, 0), TransactionType = "Order", Amount = 12.75m, PaymentMethod = "PayPal", Status = "Completed", OrderId = "ORD123457", RestaurantName = "Subway", PromoCode = "SUBWAY20" },
+        new TransactionHistory { TransactionId = 3, TransactionDate = new DateTime(2024, 1, 20, 19, 45, 0), TransactionType = "Refund", Amount = -5.00m, PaymentMethod = "Wallet", Status = "Completed", OrderId = "ORD123458", RestaurantName = "McDonald's", PromoCode = "" },
+        new TransactionHistory { TransactionId = 4, TransactionDate = new DateTime(2024, 2, 10, 21, 30, 0), TransactionType = "Order", Amount = 18.40m, PaymentMethod = "Credit Card", Status = "Completed", OrderId = "ORD123459", RestaurantName = "KFC", PromoCode = "KFC50" },
+        new TransactionHistory { TransactionId = 5, TransactionDate = new DateTime(2024, 2, 15, 16, 00, 0), TransactionType = "Order", Amount = 22.00m, PaymentMethod = "Credit Card", Status = "Failed", OrderId = "ORD123460", RestaurantName = "Burger King", PromoCode = "" },
+        new TransactionHistory { TransactionId = 6, TransactionDate = new DateTime(2024, 2, 25, 13, 30, 0), TransactionType = "Order", Amount = 30.00m, PaymentMethod = "Wallet", Status = "Completed", OrderId = "ORD123461", RestaurantName = "Domino's Pizza", PromoCode = "DOMINO10" },
+        new TransactionHistory { TransactionId = 7, TransactionDate = new DateTime(2024, 3, 5, 11, 00, 0), TransactionType = "Order", Amount = 15.20m, PaymentMethod = "PayPal", Status = "Completed", OrderId = "ORD123462", RestaurantName = "Taco Bell", PromoCode = "" },
+        new TransactionHistory { TransactionId = 8, TransactionDate = new DateTime(2024, 3, 15, 17, 45, 0), TransactionType = "Refund", Amount = -10.00m, PaymentMethod = "Credit Card", Status = "Completed", OrderId = "ORD123463", RestaurantName = "Starbucks", PromoCode = "" },
+    };
+
+}

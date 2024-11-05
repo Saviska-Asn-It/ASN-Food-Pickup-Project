@@ -1,4 +1,4 @@
-﻿@page "/"
+﻿@page "/Login"
 @rendermode InteractiveServer
 
 <PageTitle>Login Page</PageTitle>
@@ -36,7 +36,6 @@
             border-radius: 2em;
             box-shadow: 0 0 200px #c4c4c4;
             padding: 5em;
-            padding-bottom: 2em;
         }
 
         a {
@@ -47,7 +46,13 @@
                 text-shadow: 3px 3px 5px gray;
             }
 
-        /* Custom style for MudTextField border color and Label color */
+        .AccountRegSuccessIcon {
+            padding: 1em;
+            color: black;
+            background-color: lightgreen;
+        }
+
+        /* Custom style for MudBlazor Components */
         .custom-mudtextfield .mud-input {
             --mud-palette-primary: #000000;
         }
@@ -59,138 +64,68 @@
         .custom-mudtextfield {
             --mud-default-borderradius: 2em;
         }
+
     </style>
 </head>
 
-<MudLayout>
-    <MudAppBar Elevation="1">
-        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@ToggleDrawer" />
-        <MudSpacer />
-        <div class="container-fluid bg-black NavigationBar">
-            <a class="navbar-brand text-white fw-bold fs-2 didact-gothic-regular" href="#">
-                <img src="https://icones.pro/wp-content/uploads/2021/04/icone-de-nourriture-jaune-symbole-png.png" alt="Logo" width="50" height="50" class="d-inline-block align-text-top">
-                <span class="text-warning">Food</span> Store
-            </a>
-        </div>
-    </MudAppBar>
-    <MudDrawer @bind-Open="@_open" Elevation="1">
-        <MudDrawerHeader>
-            <MudText Typo="Typo.h6">My App</MudText>
-        </MudDrawerHeader>
-        <MudNavMenu>
-            <MudNavLink Match="NavLinkMatch.All">Store</MudNavLink>
-            <MudNavLink Match="NavLinkMatch.All">Library</MudNavLink>
-            <MudNavLink Match="NavLinkMatch.All">Community</MudNavLink>
-        </MudNavMenu>
-    </MudDrawer>
-</MudLayout>
-@code {
-    private bool _open = false;
-
-    private void ToggleDrawer()
-    {
-        _open = !_open;
-    }
-}
-
-
-
- @* New Account Form *@
+@* Login Account Form *@
 <div class="container d-flex flex-column justify-content-center align-items-center min-vh-100">
     <form class="didact-gothic-regular text-center">
-        <span class="col-12 col-md-9 text-black fs-3">Create a new <span class="text-warning fw-bold">Food</span> <span class="fw-bold">Store</span> account.</span>
         <div class="col">
-            <br />
-            <br />
-            <span class="col-12 col-md-9 text-black fs-5">Type your email address / phone number.</span>
+            <span class="col-12 col-md-9 text-black fs-3">Log in to your <span class="text-warning fw-bold">Food</span> <span class="fw-bold">Store</span> account.</span>
             <div class="col-12 fs-5 ">
-                <MudTextField @bind-Value="UsernameOrPhoneNumber" Label="Email Address or Phone Number" Variant="Variant.Outlined" Class="custom-mudtextfield"></MudTextField>
-            </div>
-            <br />
-            <br />
-            <span class="col-12 col-md-9 text-black fs-5">Create a password for your account.</span>
-            <br />
-            <div class="col-12 fs-5 ">
-                <MudTextField @bind-Value="Password1" Label="Type your password" Variant="Variant.Outlined" Class="custom-mudtextfield" InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="ButtonTestclick" AdornmentAriaLabel="Show Password" />
+                <br />
+                <MudTextField @bind-Value="EmailAddress" Label="Email Address" Variant="Variant.Outlined" Class="custom-mudtextfield"></MudTextField>
             </div>
             <br />
             <div class="col-12 fs-5 ">
-                <MudTextField @bind-Value="Password2" Label="Re-Type your password" Variant="Variant.Outlined" Class="custom-mudtextfield" InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="ButtonTestclick" AdornmentAriaLabel="Show Password" />
+                <MudTextField @bind-Value="Password" Label="Password" Variant="Variant.Outlined" Class="custom-mudtextfield" InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="ButtonTestclick" AdornmentAriaLabel="Show Password" />
             </div>
             <br />
         </div>
-        <button type="submit" class="btn btn-primary col-9 fs-5 " id="SignupContinueButton">Continue >>></button>
+        <button type="submit" class="btn btn-primary col-9 fs-5 " id="LoginButton">Log in</button>
         <br />
         <br />
-        <br />
-        <span class="fs-5">--------------- or ---------------</span>
-        <br />
-        <br />
-        <br />
-        <button type="button" class="btn btn-primary col-9 fs-5 " id="SignupWithGoogleButton"><img src="https://www.transparentpng.com/thumb/google-logo/google-logo-png-icon-free-download-SUF63j.png" width="30px">&nbsp; &nbsp; Sign up with Google</button>
-        <br />
-        <br />
-        <br />
-        <br />
-        <a href=""><h6>Alread have an Account ?</h6></a>
+        <div class="d-flex justify-content-between align-items-center">
+            <a href=""><h6>Forgot Password ?</h6></a>
+            <a href=""><h6>Create an Account</h6></a>
+        </div>
     </form>
-    </div>
+</div>
 
+@* Password reset request Form *@
+<div class="container d-flex flex-column justify-content-center align-items-center min-vh-100">
+    <form class="didact-gothic-regular text-center">
+        <div class="col">
+            <span class="col-12 col-md-9 text-black fs-3">Rest your <span class="text-warning fw-bold">Food</span> <span class="fw-bold">Store</span> account password.</span>
+            <div class="col-12 fs-5 ">
+                <br />
+                <span class="col-12 col-md-9 text-black fs-5">Please enter the email address associated with your existing account.</span>
+                <br />
+                <MudTextField @bind-Value="EmailAddress" Label="Email Address" Variant="Variant.Outlined" Class="custom-mudtextfield"></MudTextField>
+            </div>
+            <br />
+            <br />
+        </div>
+        <button type="submit" class="btn btn-primary col-9 fs-5 " id="ReqPasswordResetButton">Continue</button>
+    </form>
+</div>
 
-@* Login Account Form *@
-    <div class="container d-flex flex-column justify-content-center align-items-center min-vh-100">
-        <form class="didact-gothic-regular text-center">
-            <div class="col">
-                <span class="col-12 col-md-9 text-black fs-3">Log in to your <span class="text-warning fw-bold">Food</span> <span class="fw-bold">Store</span> account.</span>
-                <div class="col-12 fs-5 ">
-                    <br />
-                    <MudTextField @bind-Value="UsernameOrPhoneNumber" Label="Email Address or Phone Number" Variant="Variant.Outlined" Class="custom-mudtextfield"></MudTextField>
-                </div>
-                <br />
-                <div class="col-12 fs-5 ">
-                    <MudTextField @bind-Value="Password" Label="Password" Variant="Variant.Outlined" Class="custom-mudtextfield" InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="ButtonTestclick" AdornmentAriaLabel="Show Password" />
-                </div>
-                <br />
-            </div>
-            <button type="submit" class="btn btn-primary col-9 fs-5 " id="LoginButton">Log in</button>
+@* Reset Password Inbox check Msg *@
+<div class="container d-flex flex-column justify-content-center align-items-center min-vh-100">
+    <form class="didact-gothic-regular text-center">
+        <span class="col-12 col-md-9 text-black fs-3">Resetting  your <span class="text-warning fw-bold">Food</span> <span class="fw-bold">Store</span> account password.</span>
+        <span class="col">
             <br />
             <br />
-            <br />
-            <span class="fs-5">--------------- or ---------------</span>
-            <br />
+            <img src="https://static.thenounproject.com/png/1028813-200.png" width="70px" />
             <br />
             <br />
-            <button type="button" class="btn btn-primary col-9 fs-5 " id="LoginWithGoogleButton"><img src="https://www.transparentpng.com/thumb/google-logo/google-logo-png-icon-free-download-SUF63j.png" width="30px">&nbsp; &nbsp; Log in with Google</button>
+            <span class="col-12 col-md-9 text-black fs-5 ">We have sent a password reset link via email. Please check your inbox.</span>
             <br />
-            <br />
-            <br />
-            <br />
-            <div class="d-flex justify-content-between align-items-center">
-                <a href=""><h6>Forgot Password ?</h6></a>
-                <a href=""><h6>Create an Account</h6></a>
-            </div>
-        </form>
-    </div>
-
-@* New Account Verification Form *@
-    <div class="container d-flex flex-column justify-content-center align-items-center min-vh-100">
-        <form class="didact-gothic-regular text-center">
-            <span class="col-12 col-md-9 text-black fs-3">Registering  your <span class="text-warning fw-bold">Food</span> <span class="fw-bold">Store</span> account.</span>
-            <div class="col">
-                <br />
-                <br />
-                <span class="col-12 col-md-9 text-black fs-5 ">Enter the one-time password (OTP) code you received by SMS or email.</span>
-                <div class="col-12 fs-5">
-                    <MudTextField @bind-Value="OTP" Label="OTP" Variant="Variant.Outlined" Class="custom-mudtextfield"></MudTextField>
-                </div>
-                <br />
-            </div>
-            <button type="submit" class="btn btn-primary col-9 fs-5 " id="ConfirmRegisterButton">Confirm</button>
-            <br />
-            <br />
-            <button type="button" class="btn btn-outline-secondary col-5 fs-6 " id="CancelButton">Cancel</button>
-        </form>
-    </div>
+        </span>
+    </form>
+</div>
 
 @* Reset Password Form *@
 <div class="container d-flex flex-column justify-content-center align-items-center min-vh-100">
@@ -218,28 +153,137 @@
     </form>
 </div>
 
-@* Reset Account password Verification Form *@
-@* <div class="container d-flex flex-column justify-content-center align-items-center min-vh-100">
+
+@* Password rerset Successful Msg *@
+<div class="container d-flex flex-column justify-content-center align-items-center min-vh-100">
     <form class="didact-gothic-regular text-center">
-        <span class="col-12 col-md-9 text-black fs-3">Please confirm the process for resetting your <span class="text-warning fw-bold">Food</span> <span class="fw-bold">Store</span> account password.</span>
+        <span class="col-12 col-md-9 text-black fs-3">Reset your <span class="text-warning fw-bold">Food</span> <span class="fw-bold">Store</span> account password.</span>
+        <span class="col">
+            <br />
+            <br />
+            <img src="https://img.freepik.com/premium-vector/padlock-check-mark-flat-vector-icon-secure-internet-icon-symbol-security-protection-web_926793-175.jpg" width="100px" />
+            <br />
+            <br />
+            <span class="col-12 col-md-9 text-black fs-5 ">Your password has been reset successfully.</span>
+            <br />
+            <br />
+            <br />
+            <button type="button" class="btn btn-primary col-9 fs-5 " id="LoginButton">Back to Log in Page</button>
+        </span>
+    </form>
+</div>
+
+@* New Account Form *@
+<div class="container d-flex flex-column justify-content-center align-items-center min-vh-100">
+    <form class="didact-gothic-regular text-center">
+        <span class="col-12 col-md-9 text-black fs-3">Create a new <span class="text-warning fw-bold">Food</span> <span class="fw-bold">Store</span> account.</span>
         <div class="col">
             <br />
             <br />
-            <span class="col-12 col-md-9 text-black fs-5 ">Enter the one-time password (OTP) code you received by SMS or email.</span>
-            <div class="col-12 fs-5">
-                <MudTextField @bind-Value="OTP" Label="OTP" Variant="Variant.Outlined" Class="custom-mudtextfield"></MudTextField>
+            <span class="col-12 col-md-9 text-black fs-5">Enter your information.</span>
+            <div class="col-12 fs-5 ">
+                <MudTextField @bind-Value="Name" Label="Name" Variant="Variant.Outlined" Class="custom-mudtextfield"></MudTextField>
             </div>
             <br />
+            <div class="col-12 fs-5 ">
+                <MudTextField @bind-Value="EmailAddress" Label="Email Address" Variant="Variant.Outlined" Class="custom-mudtextfield"></MudTextField>
+            </div>
+            <br />
+            <div class="col-12 fs-5 ">
+                <MudTextField @bind-Value="PhoneNumber" Label="Phone Number" Variant="Variant.Outlined" Class="custom-mudtextfield"></MudTextField>
+            </div>
+            <br />
+            <div class="col-12 fs-5 ">
+                <MudTextField @bind-Value="Address" Label="Address" Variant="Variant.Outlined" Class="custom-mudtextfield"></MudTextField>
+            </div>
+            <br />
+            <br />
+            <span class="col-12 col-md-9 text-black fs-5">Create a password for your account.</span>
+            <br />
+            <div class="col-12 fs-5 ">
+                <MudTextField @bind-Value="Password1" Label="Type your password" Variant="Variant.Outlined" Class="custom-mudtextfield" InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="ButtonTestclick" AdornmentAriaLabel="Show Password" />
+            </div>
+            <br />
+            <div class="col-12 fs-5 ">
+                <MudTextField @bind-Value="Password2" Label="Re-Type your password" Variant="Variant.Outlined" Class="custom-mudtextfield" InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="ButtonTestclick" AdornmentAriaLabel="Show Password" />
+            </div>
+            <br />
+            <br />
         </div>
-        <button type="submit" class="btn btn-primary col-9 fs-5 " id="ConfirmPasswordResetButton">Confirm</button>
+        <button type="submit" class="btn btn-primary col-9 fs-5 " id="SignupContinueButton">Continue</button>
         <br />
         <br />
-        <button type="button" class="btn btn-outline-secondary col-5 fs-6 " id="CancelButton">Cancel</button>
+        <br />
+        <a href=""><h6>Alread have an Account ?</h6></a>
     </form>
-</div> *@
+</div>
+
+@* New Account Verification Inbox check Msg *@
+<div class="container d-flex flex-column justify-content-center align-items-center min-vh-100">
+    <form class="didact-gothic-regular text-center">
+        <span class="col-12 col-md-9 text-black fs-3">Registering  your <span class="text-warning fw-bold">Food</span> <span class="fw-bold">Store</span> account.</span>
+        <span class="col">
+            <br />
+            <br />
+            <img src="https://static.thenounproject.com/png/1028813-200.png" width="70px" />
+            <br />
+            <br />
+            <span class="col-12 col-md-9 text-black fs-5 ">We have sent an email to verify your account. Please check your inbox.</span>
+            <br />
+        </span>
+    </form>
+</div>
+
+@* New Account Verification Successful Msg *@
+<div class="container d-flex flex-column justify-content-center align-items-center min-vh-100">
+    <form class="didact-gothic-regular text-center">
+        <span class="col-12 col-md-9 text-black fs-3">Registering  your <span class="text-warning fw-bold">Food</span> <span class="fw-bold">Store</span> account.</span>
+        <span class="col">
+            <br />
+            <br />
+            <img src="https://static-00.iconduck.com/assets.00/success-icon-512x512-qdg1isa0.png" width="70px" />
+            <br />
+            <br />
+            <span class="col-12 col-md-9 text-black fs-5 ">Your account registration was successful.</span>
+            <br />
+            <br />
+            <br />
+            <button type="button" class="btn btn-primary col-9 fs-5 " id="BrowseFoodRestaurantButton">Browse Food & Restaurants</button>
+        </span>
+    </form>
+</div>
+
+
+@* New Account Verification Error Msg *@
+<div class="container d-flex flex-column justify-content-center align-items-center min-vh-100">
+    <form class="didact-gothic-regular text-center">
+        <span class="col-12 col-md-9 text-black fs-3">Registering  your <span class="text-warning fw-bold">Food</span> <span class="fw-bold">Store</span> account.</span>
+        <span class="col">
+            <br />
+            <br />
+            <img src="https://cdn-icons-png.flaticon.com/512/6659/6659895.png" width="70px" />
+            <br />
+            <br />
+            <span class="col-12 col-md-9 text-black fs-5 ">Your account registration was unsuccessful.</span>
+            <br />
+            <br />
+            <br />
+            <button type="button" class="btn btn-primary col-9 fs-5 " id="BacktoSignUpButton">Back to Sign Up page</button>
+        </span>
+    </form>
+</div>
+
+
+
+
+
+
 
 @code {
-    public string? UsernameOrPhoneNumber { get; set; }
+    public string? Name { get; set; }
+    public string? EmailAddress { get; set; }
+    public string? PhoneNumber { get; set; }
+    public string? Address { get; set; }
     public string? Password { get; set; }
     public string? Password1 { get; set; }
     public string? Password2 { get; set; }

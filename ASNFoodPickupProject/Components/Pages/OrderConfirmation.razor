@@ -1,0 +1,141 @@
+﻿@page "/"
+
+<PageTitle>Order Confirmation</PageTitle>
+
+<head>
+    <style>
+
+        .btn {
+            border-radius: 2em;
+        }
+
+        .btn-primary {
+            border: none;
+            background-color: black;
+        }
+
+            .btn-primary:hover {
+                background-color: dimgray;
+            }
+
+        .card{
+            border: none;
+            border-radius: 2em;
+            box-shadow: 0 0 200px #c4c4c4;
+        }
+
+
+    </style>
+</head>
+
+<h3 class="fw-bold text-center text-black m-5">Please confirm your order</h3>
+
+<div class="d-flex justify-content-center align-items-center mb-5">
+<div class="card MyOrderCard fs-5 col-lg-4 col-md-6 col-sm-11">
+    <img src="https://download.logo.wine/logo/KFC/KFC-Logo.wine.png" class="card-img-top" alt="Crispy Comte Cheesburger">
+    <div class="card-body">
+        <span class="m-3">
+            <p class="fw-bold text-center fs-4">Crispy Comte Cheesburger</p>
+            <ul class="d-flex justify-content-between align-items-center">
+                <li>Quantity : </li>
+                <li>3</li>
+            </ul>
+            <ul class="d-flex justify-content-between align-items-center">
+                <li>Additions : </li>
+                <li>None</li>
+            </ul>
+        </span>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+            <span class="m-3">
+                <p class="fw-bold text-start">Restaurant Information</p>
+                <ul class="d-flex justify-content-between align-items-center">
+                    <li>Name : </li>
+                    <li>KFC</li>
+                </ul>
+                <ul class="d-flex justify-content-between align-items-center">
+                    <li>Location : </li>
+                    <li>Kandy</li>
+                </ul>
+            </span>
+        </li>
+        <li class="list-group-item">
+            <span class="m-3">
+                <p class="fw-bold text-start">Contact Information</p>
+                <ul class="d-flex justify-content-between align-items-center">
+                    <li>Name : </li>
+                    <li>Saviska</li>
+                </ul>
+                <ul class="d-flex justify-content-between align-items-center">
+                    <li>Contact Number : </li>
+                    <li>0755658770</li>
+                </ul>
+                <ul class="d-flex justify-content-between align-items-center">
+                    <li>Address : </li>
+                    <li>No. 12, Kandy Road, Kandy</li>
+                </ul>
+                <ul class="d-flex justify-content-between align-items-center">
+                    <li></li>
+                    <button type="button" class="btn btn-primary mt-5"><MudIcon Icon="@Icons.Material.Filled.Edit" /></button>
+                </ul>
+            </span>
+        </li>
+            <li class="list-group-item">
+                <span class="m-3">
+                    <p class="fw-bold text-start">Payment Information</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <img src="https://cdn-icons-png.flaticon.com/256/5968/5968299.png" class="fab fa-4x text-body pe-3" width="75px">
+                        <p class="d-flex flex-column">
+                            <b>Martina Thomas</b><span class="small text-muted">9898 **** **** 8880</span>
+                        </p>
+                    </div>
+                    <ul class="d-flex justify-content-between align-items-center">
+                        <li></li>
+                        <button type="button" class="btn btn-primary mt-5"><MudIcon Icon="@Icons.Material.Filled.Edit" /></button>
+                    </ul>
+                </span>
+            </li>
+    <li class="list-group-item">
+        <span class="m-3">
+            <p class="fw-bold text-start">
+                Discounts & Promotions
+            </p>
+            <ul class="d-flex justify-content-between align-items-center">
+                <li>Discounts : </li>
+                <li>None</li>
+            </ul>
+            <ul class="d-flex justify-content-between align-items-center">
+                <li>Promotions : </li>
+                <li>None</li>
+            </ul>
+            <p class="fw-bold text-start mt-3">
+                Order total
+            </p>
+            <ul class="d-flex justify-content-between align-items-center">
+                <li>Subtotal : </li>
+                <li>1500.00 LKR</li>
+            </ul>
+            <ul class="d-flex justify-content-between align-items-center">
+                <li>Taxes & Other Fees : </li>
+                <li>120.00 LKR</li>
+            </ul>
+            <ul class="d-flex justify-content-between align-items-center fw-bold">
+                <li>Total : </li>
+                <li>1620.00 LKR</li>
+            </ul>
+        </span>
+    </li>
+    </ul>
+    <div class="card-body text-center">
+        <button type="submit" class="btn btn-primary col-7 fs-5 " id="ConfirmOrder">Confirm My Order</button>
+        <br />
+        <br />
+        <button type="button" class="btn btn-outline-secondary col-4 fs-6 " id="CancelButton">Cancel</button>
+    </div>
+</div>
+</div>
+
+@code {
+
+}
