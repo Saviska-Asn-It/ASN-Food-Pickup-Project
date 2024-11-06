@@ -1,4 +1,4 @@
-﻿@page "/aa"
+﻿@page "/"
 @rendermode InteractiveServer
 @using ASNFoodPickupProject.Models
 
@@ -24,7 +24,7 @@
         .ProfileCard, MudTabs {
             border: 3px solid lightgray;
             border-radius: 2em;
-            padding:1em;
+            padding: 1em;
         }
 
         .centered-tabs {
@@ -39,38 +39,40 @@
                 align-items: center;
             }
 
-        .mud-ripple{
+        .mud-ripple {
             background-color: darkgrey;
-            border-radius:2em;
-            color:white;
+            border-radius: 2em;
+            color: white;
         }
 
-        .mud-ripple:hover{
+            .mud-ripple:hover {
                 background-color: darkgrey;
-        }
-        .mud-tab-slider-horizontal{
-            visibility:hidden;
+            }
+
+        .mud-tab-slider-horizontal {
+            visibility: hidden;
         }
 
-        .mud-tab-active{
-            background-color:black;
+        .mud-tab-active {
+            background-color: black;
         }
-        .mud-tab-active:hover{
+
+            .mud-tab-active:hover {
                 background-color: black;
+            }
+
+        .mud-tab.mud-tab-active {
+            background-color: black;
+            color: white;
+            border: 3px solid gray;
         }
 
-        .mud-tab.mud-tab-active{
-            background-color:black;
-            color:white;
-            border:3px solid gray;
-        }
-
-        .mud-tab.mud-tab-active:hover {
+            .mud-tab.mud-tab-active:hover {
                 background-color: black;
                 color: white;
-        }
+            }
 
-        .mud-tab:hover{
+        .mud-tab:hover {
             background-color: #c4c1c0;
         }
 
@@ -85,15 +87,36 @@
         }
 
         .mud-expand-panel-header {
-            background-color:black;
-            color:white;
-            margin:1em;
-            border-radius:2em;
+            background-color: black;
+            color: white;
+            margin: 1em;
+            border-radius: 2em;
         }
 
-                .Mytext{
+        .Mytext {
             font-family: "Didact Gothic", sans-serif;
         }
+
+        .modal-content {
+            border-radius: 2em;
+            border: none;
+            box-shadow: 0 0 150px #454444;
+            margin-top: 3em;
+        }
+
+        /* Custom style for MudBlazor Components */
+        .custom-mudtextfield .mud-input {
+            --mud-palette-primary: #000000;
+        }
+
+        .custom-mudtextfield {
+            --mud-palette-primary: #000000;
+        }
+
+        .custom-mudtextfield {
+            --mud-default-borderradius: 2em;
+        }
+
     </style>
 </head>
 <br />
@@ -102,33 +125,33 @@
 <section class="ProfileSection fs-5">
     <div class="col">
         <div class="d-flex justify-content-center">
-            <div class="col-lg-5 UserInfo">
+            <div class="col-lg-6 col-md-6 UserInfo">
                 <div class="ProfileCard mb-4 text-center">
                     <div class="card-body">
-                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                        <img src="https://png.pngtree.com/png-vector/20220817/ourmid/pngtree-man-avatar-with-circle-frame-vector-ilustration-png-image_6110328.png" alt="avatar"
                              class="rounded-circle img-fluid" style="width: 150px;">
-                        <h5 class="my-3 fw-bold">Saviska Jayuawickrama</h5>
-                            <div class="mb-4">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col mb-4">
-                                            <MudIcon Icon="@Icons.Material.Filled.Email" /><p class="text-muted mb-0">Saviska@ASNIT.lk</p>
-                                        </div>
+                        <h5 class="my-3 fw-bold">Saviska Jayawickrama</h5>
+                        <div class="mb-4">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col mb-4">
+                                        <MudIcon Icon="@Icons.Material.Filled.Email" /><p class="text-muted mb-0">Saviska@ASNIT.lk</p>
                                     </div>
-                                    <div class="row">
-                                        <div class="col mb-4">
-                                            <MudIcon Icon="@Icons.Material.Filled.LocalPhone" /><p class="text-muted mb-0">0755658770</p>
-                                        </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-4">
+                                        <MudIcon Icon="@Icons.Material.Filled.LocalPhone" /><p class="text-muted mb-0">0755658770</p>
                                     </div>
-                                    <div class="row">
-                                        <div class="col mb-4">
-                                            <MudIcon Icon="@Icons.Material.Filled.LocationOn" /><p class="text-muted mb-0">No. 12, Kandy Road,Kandy</p>
-                                        </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-4">
+                                        <MudIcon Icon="@Icons.Material.Filled.LocationOn" /><p class="text-muted mb-0">No. 12, Kandy Road, Kandy</p>
                                     </div>
                                 </div>
                             </div>
+                        </div>
                         <div class="d-flex justify-content-center mb-2">
-                            <button type="button" class="btn btn-primary col-5 fs-5 " id="UpdateUserInfoButton">Update</button>
+                            <button type="button" class="btn btn-primary col-5 fs-5 " id="UpdateUserInfoButton" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Update</button>
                         </div>
                     </div>
                 </div>
@@ -137,25 +160,63 @@
         <br />
         <br />
         <h3 class="fw-bold text-center">Your Payment Information</h3>
+
+        @* No payment info part *@
         <section>
             <div class=" py-5">
                 <div class="row d-flex justify-content-center">
                     <div class="col-md-12 col-lg-8 col-xl-6">
                         <div class="ProfileCard ">
                             <div class="card-body mx-1 my-2">
-                                <div class="d-flex align-items-center">
-                                    <div>
-                                        <img src="https://cdn-icons-png.flaticon.com/256/5968/5968299.png" class="fab fa-4x text-body pe-3" width="100px">
-                                    </div>
-                                    <div>
-                                        <p class="d-flex flex-column mb-0">
-                                            <b>Martina Thomas</b><span class="small text-muted">**** 8880</span>
-                                        </p>
-                                    </div>
-                                </div>
+                                <ul class="d-flex justify-content-between align-items-center">
+                                    <li>
+                                        <div class="d-flex align-items-center">
+                                            <div>
+                                                <img src="https://help.trademe.co.nz/hc/article_attachments/13758305207705" class="fab fa-4x text-body pe-3" width="100px">
+                                            </div>
+                                            <div>
+                                                <p class="d-flex flex-column mb-3">
+                                                    <b>No Any Payment Information Yet...</b>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg fs-5" data-bs-toggle="modal" data-bs-target="#AddPaymentInfoForm">Add</button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
+        @* Available payment info *@
+        <section>
+            <div class=" py-5">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-12 col-lg-8 col-xl-6">
+                        <div class="ProfileCard ">
+                            <div class="card-body mx-1 my-2">
+                                <ul class="d-flex justify-content-between align-items-center">
+                                    <li>
+                                        <div class="d-flex align-items-center">
+                                            <div>
+                                                <img src="https://cdn-icons-png.flaticon.com/256/5968/5968299.png" class="fab fa-4x text-body pe-3" width="100px">
+                                            </div>
+                                            <div>
+                                                <p class="d-flex flex-column mb-3">
+                                                    <b>Saviska Jayawickrama</b><span class="small text-muted">9898 **** **** 8880</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <button type="button" class="btn fs-5 m-2" id="ViewPaymentInfoButton"><MudIcon Icon="@Icons.Material.Filled.RemoveRedEye"></MudIcon> </button>
+                                    </li>
+                                </ul>
                                 <div class="d-flex justify-content-end align-items-center pb-1">
-                                    <button type="button" class="btn btn-outline-secondary  fs-5 m-2" id="CancelButton">View</button>
                                     <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg fs-5">Update</button>
                                 </div>
                             </div>
@@ -164,82 +225,190 @@
                 </div>
             </div>
         </section>
-        </div>
+    </div>
 
 </section>
 <br />
 <br />
 <h3 class="fw-bold text-center">Your History</h3>
 <br />
-            <MudExpansionPanel>
-    <TitleContent>
-                    <div class="d-flex">
-                <MudIcon Icon="@Icons.Material.Filled.Payments" class="mr-3"></MudIcon>
-                        <MudText Class=" fs-5 Mytext">Transaction History</MudText>
-                    </div>
-                </TitleContent>
-
-                <ChildContent>
-                <MudTable Items="@Transactions.Take(5)" Hover="true" Breakpoint="Breakpoint.Sm" LoadingProgressColor="Color.Info">
-                    <HeaderContent>
-                        <MudTh Class="table-head">Transaction ID</MudTh>
-                        <MudTh>Transaction Date</MudTh>
-                        <MudTh>Type</MudTh>
-                        <MudTh>Amount</MudTh>
-                        <MudTh>Payment Method</MudTh>
-                        <MudTh>Status</MudTh>
-                        <MudTh>Order ID</MudTh>
-                        <MudTh>Restaurant</MudTh>
-                        <MudTh>Promo Code</MudTh>
-                    </HeaderContent>
-                    <RowTemplate>
-                        <MudTd DataLabel="Transaction ID">@context.TransactionId</MudTd>
-                        <MudTd DataLabel="Transaction Date">@context.TransactionDate.ToString("yyyy-MM-dd HH:mm")</MudTd>
-                        <MudTd DataLabel="Type">@context.TransactionType</MudTd>
-                        <MudTd DataLabel="Amount">@context.Amount.ToString("C")</MudTd>
-                        <MudTd DataLabel="Payment Method">@context.PaymentMethod</MudTd>
-                        <MudTd DataLabel="Status">@context.Status</MudTd>
-                        <MudTd DataLabel="Order ID">@context.OrderId</MudTd>
-                        <MudTd DataLabel="Restaurant">@context.RestaurantName</MudTd>
-                        <MudTd DataLabel="Promo Code">@context.PromoCode</MudTd>
-                    </RowTemplate>
-                </MudTable>
-                </ChildContent>
-
-    </MudExpansionPanel>
-    <br>
-    <MudExpansionPanel>
+<MudExpansionPanel>
     <TitleContent>
         <div class="d-flex">
-                <MudIcon Icon="@Icons.Material.Filled.Fastfood" class="mr-3"></MudIcon>
+            <MudIcon Icon="@Icons.Material.Filled.Payments" class="mr-3"></MudIcon>
+            <MudText Class=" fs-5 Mytext">Transaction History</MudText>
+        </div>
+    </TitleContent>
+
+    <ChildContent>
+        <MudTable Items="@Transactions.Take(5)" Hover="true" Breakpoint="Breakpoint.Sm" LoadingProgressColor="Color.Info">
+            <HeaderContent>
+                <MudTh Class="table-head">Transaction ID</MudTh>
+                <MudTh>Transaction Date</MudTh>
+                <MudTh>Type</MudTh>
+                <MudTh>Amount</MudTh>
+                <MudTh>Payment Method</MudTh>
+                <MudTh>Status</MudTh>
+                <MudTh>Order ID</MudTh>
+                <MudTh>Restaurant</MudTh>
+                <MudTh>Promo Code</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Transaction ID">@context.TransactionId</MudTd>
+                <MudTd DataLabel="Transaction Date">@context.TransactionDate.ToString("yyyy-MM-dd HH:mm")</MudTd>
+                <MudTd DataLabel="Type">@context.TransactionType</MudTd>
+                <MudTd DataLabel="Amount">@context.Amount.ToString("C")</MudTd>
+                <MudTd DataLabel="Payment Method">@context.PaymentMethod</MudTd>
+                <MudTd DataLabel="Status">@context.Status</MudTd>
+                <MudTd DataLabel="Order ID">@context.OrderId</MudTd>
+                <MudTd DataLabel="Restaurant">@context.RestaurantName</MudTd>
+                <MudTd DataLabel="Promo Code">@context.PromoCode</MudTd>
+            </RowTemplate>
+        </MudTable>
+    </ChildContent>
+
+</MudExpansionPanel>
+<br>
+<MudExpansionPanel>
+    <TitleContent>
+        <div class="d-flex">
+            <MudIcon Icon="@Icons.Material.Filled.Fastfood" class="mr-3"></MudIcon>
             <MudText Class="fs-5 Mytext">Order History</MudText>
+        </div>
+    </TitleContent>
+    <ChildContent>
+        <MudTable Items="@Transactions.Take(5)" Hover="true" Breakpoint="Breakpoint.Sm" LoadingProgressColor="Color.Info">
+            <HeaderContent>
+                <MudTh>Order ID</MudTh>
+                <MudTh>Date</MudTh>
+                <MudTh>Food</MudTh>
+                <MudTh>Amount</MudTh>
+                <MudTh>Food Name</MudTh>
+                <MudTh>Status</MudTh>
+                <MudTh>Restaurant</MudTh>
+                <MudTh>Promo Code</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Transaction ID">@context.TransactionId</MudTd>
+                <MudTd DataLabel="Transaction Date">@context.TransactionDate.ToString("yyyy-MM-dd HH:mm")</MudTd>
+                <MudTd DataLabel="Type">@context.TransactionType</MudTd>
+                <MudTd DataLabel="Amount">@context.Amount.ToString("C")</MudTd>
+                <MudTd DataLabel="Payment Method">@context.PaymentMethod</MudTd>
+                <MudTd DataLabel="Status">@context.Status</MudTd>
+                <MudTd DataLabel="Restaurant">@context.RestaurantName</MudTd>
+                <MudTd DataLabel="Promo Code">@context.PromoCode</MudTd>
+            </RowTemplate>
+        </MudTable>
+    </ChildContent>
+</MudExpansionPanel>
+
+
+@* Edit User Info Modal *@
+<div class="modal fade  modal-dialog-scrollable" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body Myform">
+                @* Update Account Form *@
+                <div class=" justify-content-center align-items-center">
+                    <form class="didact-gothic-regular text-center">
+                        <div class="col">
+                            <span class="col-12 col-md-9 text-black fs-3">Update your <span class="text-warning fw-bold">Food</span> <span class="fw-bold">Store</span> account personal details.</span>
+                            <br />
+                            <br />
+                            <div class="col-12 fs-5 ">
+                                <MudTextField @bind-Value="Name" Label="Name" Variant="Variant.Outlined" Class="custom-mudtextfield"></MudTextField>
+                            </div>
+                            <br />
+                            <div class="col-12 fs-5 ">
+                                <MudTextField @bind-Value="EmailAddress" Label="Email Address" Variant="Variant.Outlined" Class="custom-mudtextfield"></MudTextField>
+                            </div>
+                            <br />
+                            <div class="col-12 fs-5 ">
+                                <MudTextField @bind-Value="PhoneNumber" Label="Phone Number" Variant="Variant.Outlined" Class="custom-mudtextfield"></MudTextField>
+                            </div>
+                            <br />
+                            <div class="col-12 fs-5 ">
+                                <MudTextField @bind-Value="Address" Label="Address" Variant="Variant.Outlined" Class="custom-mudtextfield"></MudTextField>
+                            </div>
+                            <br />
+                        </div>
+                    </form>
+                </div>
             </div>
-        </TitleContent>
-        <ChildContent>
-            <MudTable Items="@Transactions.Take(5)" Hover="true" Breakpoint="Breakpoint.Sm" LoadingProgressColor="Color.Info">
-                <HeaderContent>
-                    <MudTh>Order ID</MudTh>
-                    <MudTh>Date</MudTh>
-                    <MudTh>Food</MudTh>
-                    <MudTh>Amount</MudTh>
-                    <MudTh>Food Name</MudTh>
-                    <MudTh>Status</MudTh>
-                    <MudTh>Restaurant</MudTh>
-                    <MudTh>Promo Code</MudTh>
-                </HeaderContent>
-                <RowTemplate>
-                    <MudTd DataLabel="Transaction ID">@context.TransactionId</MudTd>
-                    <MudTd DataLabel="Transaction Date">@context.TransactionDate.ToString("yyyy-MM-dd HH:mm")</MudTd>
-                    <MudTd DataLabel="Type">@context.TransactionType</MudTd>
-                    <MudTd DataLabel="Amount">@context.Amount.ToString("C")</MudTd>
-                    <MudTd DataLabel="Payment Method">@context.PaymentMethod</MudTd>
-                    <MudTd DataLabel="Status">@context.Status</MudTd>
-                    <MudTd DataLabel="Restaurant">@context.RestaurantName</MudTd>
-                    <MudTd DataLabel="Promo Code">@context.PromoCode</MudTd>
-                </RowTemplate>
-            </MudTable>
-        </ChildContent>
-    </MudExpansionPanel>
+            <div class="modal-footer text-center">
+                <button type="button" class="btn btn-outline-secondary col-3" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary col-5">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* Add payment info Modal *@
+<div class="modal modal-lg fade modal-dialog-scrollable" id="AddPaymentInfoForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body Myform">
+                @* Add payment info Form *@
+                <div class="m-5 justify-content-center align-items-center">
+                    <form class="didact-gothic-regular text-center">
+                        <div class="col">
+                            <span class="col-12 col-md-9 text-black fs-3">View your <span class="text-warning fw-bold">Food</span> <span class="fw-bold">Store</span> account payment information.</span>
+                            <br />
+                            <br />
+                                <div class="col-12 fs-5 ">
+                                <MudTextField @bind-Value="CardNumber" Label="Account Number" Variant="Variant.Outlined" Class="custom-mudtextfield"></MudTextField>
+                                </div>
+                            <br />
+                            <div class="col-12 fs-5 ">
+                                <MudTextField @bind-Value="CardHolderName" Label="Card Holder Name" Variant="Variant.Outlined" Class="custom-mudtextfield"></MudTextField>
+                            </div>
+                            <br />
+                            <MudGrid>
+                                <MudItem xs="6">
+                                    <MudNumericField HideSpinButtons="true" @bind-Value="ExpirationMonth" Label="Expiration Month" Variant="Variant.Outlined" Class="custom-mudtextfield" />
+                                </MudItem>
+                                <MudItem xs="6">
+                                    <MudNumericField HideSpinButtons="true" @bind-Value="ExpirationYear" Label="Expiration Year" Variant="Variant.Outlined" Class="custom-mudtextfield" />
+                                </MudItem>
+                            </MudGrid>
+                            <br />
+                            <div class="col-2 fs-5 ">
+                                <MudNumericField HideSpinButtons="true" @bind-Value="CVV" Label="CVV" Variant="Variant.Outlined" Class="custom-mudtextfield" />
+                            </div>
+                            <br />
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+            <div class="modal-footer text-center">
+                <button type="button" class="btn btn-outline-secondary col-3" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary col-5">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@code {
+    public string? Name { get; set; } = "Saviska";
+    public string? EmailAddress { get; set; } = "Saviska@ASNIT.LK";
+    public string? PhoneNumber { get; set; } = "0755658770";
+    public string? Address { get; set; } = "No.12, Kandy Road, Kandy";
+
+    public Int128? CardNumber { get; set; }
+    public string? CardHolderName { get; set; }
+    public int? ExpirationMonth { get; set; }
+    public int? ExpirationYear { get; set; }
+    public int? CVV { get; set; }
+
+
+    string country = "Sri Lanka";
+
+
+}
+
+
 
 @code {
     private List<TransactionHistory> Transactions = new List<TransactionHistory>

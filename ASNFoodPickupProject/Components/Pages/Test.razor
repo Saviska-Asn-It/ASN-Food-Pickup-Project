@@ -1,0 +1,109 @@
+﻿@page "/a"
+
+
+<head>
+    <style>
+
+        .modal-content{
+            border-radius: 2em;
+            border: none;
+        }
+
+
+        /* Custom style for MudBlazor Components */
+        .custom-mudtextfield .mud-input {
+            --mud-palette-primary: #000000;
+        }
+
+        .custom-mudtextfield {
+            --mud-palette-primary: #000000;
+        }
+
+        .custom-mudtextfield {
+            --mud-default-borderradius: 2em;
+        }
+
+    </style>
+</head>
+
+
+@* Edit User Info Button trigger modal *@
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+    Launch static backdrop modal
+</button>
+
+@* Edit User Info Modal *@
+<div class="modal fade modal-dialog modal-dialog-centered modal-dialog-scrollable" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body Myform">
+                @* Update Account Form *@
+                <div class=" justify-content-center align-items-center">
+                    <form class="didact-gothic-regular text-center">
+                        <div class="col">
+                            <span class="col-12 col-md-9 text-black fs-3">Update your <span class="text-warning fw-bold">Food</span> <span class="fw-bold">Store</span> account personal details.</span>
+                            <br />
+                            <br />
+                            <div class="col-12 fs-5 ">
+                                <MudTextField @bind-Value="Name" Label="Name" Variant="Variant.Outlined" Class="custom-mudtextfield"></MudTextField>
+                            </div>
+                            <br />
+                            <div class="col-12 fs-5 ">
+                                <MudTextField @bind-Value="EmailAddress" Label="Email Address" Variant="Variant.Outlined" Class="custom-mudtextfield"></MudTextField>
+                            </div>
+                            <br />
+                            <div class="col-12 fs-5 ">
+                                <MudTextField @bind-Value="PhoneNumber" Label="Phone Number" Variant="Variant.Outlined" Class="custom-mudtextfield"></MudTextField>
+                            </div>
+                            <br />
+                            <div class="col-12 fs-5 ">
+                                <MudTextField @bind-Value="Address" Label="Address" Variant="Variant.Outlined" Class="custom-mudtextfield"></MudTextField>
+                            </div>
+                            <br />
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    public string? Name { get; set; } = "Saviska";
+    public string? EmailAddress { get; set; } = "Saviska@ASNIT.LK";
+    public string? PhoneNumber { get; set; } = "0755658770";
+    public string? Address { get; set; } = "No.!2, Kandy Road, Kandy";
+    public string? Password { get; set; }
+    public string? Password1 { get; set; }
+    public string? Password2 { get; set; }
+    public string? OTP { get; set; }
+
+    
+
+    bool isShow;
+    InputType PasswordInput = InputType.Password;
+    string PasswordInputIcon = Icons.Material.Filled.VisibilityOff;
+
+    void ButtonTestclick()
+    {
+        @if (isShow)
+        {
+            isShow = false;
+            PasswordInputIcon = Icons.Material.Filled.VisibilityOff;
+            PasswordInput = InputType.Password;
+        }
+        else
+        {
+            isShow = true;
+            PasswordInputIcon = Icons.Material.Filled.Visibility;
+            PasswordInput = InputType.Text;
+        }
+    }
+}
