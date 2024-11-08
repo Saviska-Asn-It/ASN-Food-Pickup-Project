@@ -213,12 +213,13 @@
                                         </div>
                                     </li>
                                     <li>
-                                        <button type="button" class="btn fs-5 m-2" id="ViewPaymentInfoButton"><MudIcon Icon="@Icons.Material.Filled.RemoveRedEye"></MudIcon> </button>
+                                        <div class="d-flex justify-content-end align-items-center pb-1">
+                                            <button type="button" class="btn fs-5 m-2" id="ViewPaymentInfoButton" data-bs-toggle="modal" data-bs-target="#ViewPaymentInfoForm"><MudIcon Icon="@Icons.Material.Filled.RemoveRedEye"></MudIcon></button>
+                                            <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg fs-5" data-bs-toggle="modal" data-bs-target="#UpdatePaymentInfoForm">Update</button>
+                                        </div>
                                     </li>
                                 </ul>
-                                <div class="d-flex justify-content-end align-items-center pb-1">
-                                    <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg fs-5">Update</button>
-                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -232,75 +233,82 @@
 <br />
 <h3 class="fw-bold text-center">Your History</h3>
 <br />
-<MudExpansionPanel>
-    <TitleContent>
-        <div class="d-flex">
-            <MudIcon Icon="@Icons.Material.Filled.Payments" class="mr-3"></MudIcon>
-            <MudText Class=" fs-5 Mytext">Transaction History</MudText>
-        </div>
-    </TitleContent>
 
-    <ChildContent>
-        <MudTable Items="@Transactions.Take(5)" Hover="true" Breakpoint="Breakpoint.Sm" LoadingProgressColor="Color.Info">
-            <HeaderContent>
-                <MudTh Class="table-head">Transaction ID</MudTh>
-                <MudTh>Transaction Date</MudTh>
-                <MudTh>Type</MudTh>
-                <MudTh>Amount</MudTh>
-                <MudTh>Payment Method</MudTh>
-                <MudTh>Status</MudTh>
-                <MudTh>Order ID</MudTh>
-                <MudTh>Restaurant</MudTh>
-                <MudTh>Promo Code</MudTh>
-            </HeaderContent>
-            <RowTemplate>
-                <MudTd DataLabel="Transaction ID">@context.TransactionId</MudTd>
-                <MudTd DataLabel="Transaction Date">@context.TransactionDate.ToString("yyyy-MM-dd HH:mm")</MudTd>
-                <MudTd DataLabel="Type">@context.TransactionType</MudTd>
-                <MudTd DataLabel="Amount">@context.Amount.ToString("C")</MudTd>
-                <MudTd DataLabel="Payment Method">@context.PaymentMethod</MudTd>
-                <MudTd DataLabel="Status">@context.Status</MudTd>
-                <MudTd DataLabel="Order ID">@context.OrderId</MudTd>
-                <MudTd DataLabel="Restaurant">@context.RestaurantName</MudTd>
-                <MudTd DataLabel="Promo Code">@context.PromoCode</MudTd>
-            </RowTemplate>
-        </MudTable>
-    </ChildContent>
 
-</MudExpansionPanel>
-<br>
-<MudExpansionPanel>
-    <TitleContent>
-        <div class="d-flex">
-            <MudIcon Icon="@Icons.Material.Filled.Fastfood" class="mr-3"></MudIcon>
-            <MudText Class="fs-5 Mytext">Order History</MudText>
-        </div>
-    </TitleContent>
-    <ChildContent>
-        <MudTable Items="@Transactions.Take(5)" Hover="true" Breakpoint="Breakpoint.Sm" LoadingProgressColor="Color.Info">
-            <HeaderContent>
-                <MudTh>Order ID</MudTh>
-                <MudTh>Date</MudTh>
-                <MudTh>Food</MudTh>
-                <MudTh>Amount</MudTh>
-                <MudTh>Food Name</MudTh>
-                <MudTh>Status</MudTh>
-                <MudTh>Restaurant</MudTh>
-                <MudTh>Promo Code</MudTh>
-            </HeaderContent>
-            <RowTemplate>
-                <MudTd DataLabel="Transaction ID">@context.TransactionId</MudTd>
-                <MudTd DataLabel="Transaction Date">@context.TransactionDate.ToString("yyyy-MM-dd HH:mm")</MudTd>
-                <MudTd DataLabel="Type">@context.TransactionType</MudTd>
-                <MudTd DataLabel="Amount">@context.Amount.ToString("C")</MudTd>
-                <MudTd DataLabel="Payment Method">@context.PaymentMethod</MudTd>
-                <MudTd DataLabel="Status">@context.Status</MudTd>
-                <MudTd DataLabel="Restaurant">@context.RestaurantName</MudTd>
-                <MudTd DataLabel="Promo Code">@context.PromoCode</MudTd>
-            </RowTemplate>
-        </MudTable>
-    </ChildContent>
-</MudExpansionPanel>
+<MudGrid>
+    <MudItem xs="6">
+        @* Transaction History Expansion Panel*@
+        <MudExpansionPanel>
+            <TitleContent>
+                <div class="d-flex">
+                    <MudIcon Icon="@Icons.Material.Filled.Payments" class="mr-3"></MudIcon>
+                    <MudText Class=" fs-5 Mytext">Transaction History</MudText>
+                </div>
+            </TitleContent>
+            <ChildContent>
+                @* Transaction History Table*@
+                <MudTable Items="@Transactions.Take(5)" Hover="true" Breakpoint="Breakpoint.Sm" LoadingProgressColor="Color.Info" Class="text-center">
+                    <HeaderContent>
+                        <MudTh>Transaction ID</MudTh>
+                        <MudTh>Transaction Date</MudTh>
+                        <MudTh>Food Item</MudTh>
+                        <MudTh>Amount</MudTh>
+                        <MudTh>Restaurant</MudTh>
+                    </HeaderContent>
+                    <RowTemplate>
+                        <MudTd DataLabel="Transaction ID">@context.TransactionId</MudTd>
+                        <MudTd DataLabel="Transaction Date">@context.TransactionDate.ToString("yyyy-MM-dd HH:mm")</MudTd>
+                        <MudTd DataLabel="Payment Method">@context.FoodItem</MudTd>
+                        <MudTd DataLabel="Amount">@context.Amount.ToString("C")</MudTd>
+                        <MudTd DataLabel="Restaurant">@context.RestaurantName</MudTd>
+                    </RowTemplate>
+                </MudTable>
+                <div class="text-center">
+                    <button type="button" class="btn btn-primary col-5 m-3" data-bs-toggle="modal" data-bs-target="#ViewFullTransactionHistory">View Full Transaction History</button>
+                </div>
+            </ChildContent>
+        </MudExpansionPanel>
+    </MudItem>
+    <MudItem xs="6">
+        @* Order History Expansion Panel*@
+        <MudExpansionPanel>
+            <TitleContent>
+                <div class="d-flex">
+                    <MudIcon Icon="@Icons.Material.Filled.Fastfood" class="mr-3"></MudIcon>
+                    <MudText Class=" fs-5 Mytext">Order History</MudText>
+                </div>
+            </TitleContent>
+            <ChildContent>
+                @* Order History Table*@
+                <MudTable Items="@Orders.Take(5)" Hover="true" Breakpoint="Breakpoint.Sm" LoadingProgressColor="Color.Info" Class="text-center">
+                    <HeaderContent>
+                        <MudTh>Order ID</MudTh>
+                        <MudTh>Transaction ID</MudTh>
+                        <MudTh>Order Date </MudTh>
+                        <MudTh>Food Item </MudTh>
+                        <MudTh>Restaurant</MudTh>
+                        <MudTh>Quantity  </MudTh>
+                        <MudTh>Amount </MudTh>
+                    </HeaderContent>
+                    <RowTemplate>
+                        <MudTd DataLabel="Order ID">@context.OrderId</MudTd>
+                        <MudTd DataLabel="Order ID">@context.TransactionId</MudTd>
+                        <MudTd DataLabel="Order Date">@context.OrderDate.ToString("yyyy-MM-dd HH:mm")</MudTd>
+                        <MudTd DataLabel="Food Item">@context.FoodItem</MudTd>
+                        <MudTd DataLabel="Restaurant">@context.RestaurantName</MudTd>
+                        <MudTd DataLabel="Quantity">@context.Quantity</MudTd>
+                        <MudTd DataLabel="Amount">@context.Amount</MudTd>
+                    </RowTemplate>
+                </MudTable>
+                <div class="text-center">
+                    <button type="button" class="btn btn-primary col-5 m-3" data-bs-toggle="modal" data-bs-target="#ViewFullOrderHistory">View Full Order History</button>
+                </div>
+            </ChildContent>
+        </MudExpansionPanel>
+    </MudItem>
+</MudGrid>
+
+
 
 
 @* Edit User Info Modal *@
@@ -312,7 +320,9 @@
                 <div class=" justify-content-center align-items-center">
                     <form class="didact-gothic-regular text-center">
                         <div class="col">
-                            <span class="col-12 col-md-9 text-black fs-3">Update your <span class="text-warning fw-bold">Food</span> <span class="fw-bold">Store</span> account personal details.</span>
+                            <span class="text-warning fw-bold fs-5">Food</span> <span class="fw-bold fs-5">Store</span>
+                            <br />
+                            <span class="col-12 col-md-9 text-black fs-3">Update your personal details.</span>
                             <br />
                             <br />
                             <div class="col-12 fs-5 ">
@@ -332,12 +342,12 @@
                             </div>
                             <br />
                         </div>
+                        <button type="button" class="btn btn-primary col-6">Update</button>
+                        <br />
+                        <br />
+                        <button type="button" class="btn btn-outline-secondary col-3" data-bs-dismiss="modal">Cancel</button>
                     </form>
                 </div>
-            </div>
-            <div class="modal-footer text-center">
-                <button type="button" class="btn btn-outline-secondary col-3" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary col-5">Save</button>
             </div>
         </div>
     </div>
@@ -349,15 +359,17 @@
         <div class="modal-content">
             <div class="modal-body Myform">
                 @* Add payment info Form *@
-                <div class="m-5 justify-content-center align-items-center">
+                <div class="m-2 justify-content-center align-items-center">
                     <form class="didact-gothic-regular text-center">
                         <div class="col">
-                            <span class="col-12 col-md-9 text-black fs-3">View your <span class="text-warning fw-bold">Food</span> <span class="fw-bold">Store</span> account payment information.</span>
+                            <span class="text-warning fw-bold fs-5">Food</span> <span class="fw-bold fs-5">Store</span>
+                            <br />
+                            <span class="col-12 col-md-9 text-black fs-3">Add payment information.</span>
                             <br />
                             <br />
-                                <div class="col-12 fs-5 ">
+                            <div class="col-12 fs-5 ">
                                 <MudTextField @bind-Value="CardNumber" Label="Account Number" Variant="Variant.Outlined" Class="custom-mudtextfield"></MudTextField>
-                                </div>
+                            </div>
                             <br />
                             <div class="col-12 fs-5 ">
                                 <MudTextField @bind-Value="CardHolderName" Label="Card Holder Name" Variant="Variant.Outlined" Class="custom-mudtextfield"></MudTextField>
@@ -372,18 +384,191 @@
                                 </MudItem>
                             </MudGrid>
                             <br />
-                            <div class="col-2 fs-5 ">
+                            <div class="col-4 fs-5 ">
+                                <MudNumericField HideSpinButtons="true" @bind-Value="CVV" Label="CVV" Variant="Variant.Outlined" Class="custom-mudtextfield" />
+                            </div>
+                            <br />
+                        </div>
+                        <button type="button" class="btn btn-primary col-5">Save</button>
+                        <br />
+                        <br />
+                        <button type="button" class="btn btn-outline-secondary col-3" data-bs-dismiss="modal">Cancel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@* Update payment info Modal *@
+<div class="modal modal-lg fade modal-dialog-scrollable" id="UpdatePaymentInfoForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body Myform">
+                @* Update payment info Form *@
+                <div class="m-2 justify-content-center align-items-center">
+                    <form class="didact-gothic-regular text-center">
+                        <div class="col">
+                            <span class="text-warning fw-bold fs-5">Food</span> <span class="fw-bold fs-5">Store</span>
+                            <br />
+                            <span class="col-12 col-md-9 text-black fs-3">Update payment information.</span>
+                            <br />
+                            <br />
+                            <div class="col-12 fs-5 ">
+                                <MudTextField @bind-Value="CardNumber" Label="Account Number" Variant="Variant.Outlined" Class="custom-mudtextfield"></MudTextField>
+                            </div>
+                            <br />
+                            <div class="col-12 fs-5 ">
+                                <MudTextField @bind-Value="CardHolderName" Label="Card Holder Name" Variant="Variant.Outlined" Class="custom-mudtextfield"></MudTextField>
+                            </div>
+                            <br />
+                            <MudGrid>
+                                <MudItem xs="6">
+                                    <MudNumericField HideSpinButtons="true" @bind-Value="ExpirationMonth" Label="Expiration Month" Variant="Variant.Outlined" Class="custom-mudtextfield" />
+                                </MudItem>
+                                <MudItem xs="6">
+                                    <MudNumericField HideSpinButtons="true" @bind-Value="ExpirationYear" Label="Expiration Year" Variant="Variant.Outlined" Class="custom-mudtextfield" />
+                                </MudItem>
+                            </MudGrid>
+                            <br />
+                            <div class="col-4 fs-5 ">
                                 <MudNumericField HideSpinButtons="true" @bind-Value="CVV" Label="CVV" Variant="Variant.Outlined" Class="custom-mudtextfield" />
                             </div>
                             <br />
                         </div>
                     </form>
-                </div>
+                    <div class="text-center">
+                                                <button type="button" class="btn btn-primary col-5">Save</button>
+                        <br />
+                        <br />
+                    <button type="button" class="btn btn-outline-secondary col-3" data-bs-dismiss="modal">Cancel</button>
+                    </div>
 
+                </div>
             </div>
-            <div class="modal-footer text-center">
-                <button type="button" class="btn btn-outline-secondary col-3" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary col-5">Save</button>
+        </div>
+    </div>
+</div>
+
+
+@* View payment info Modal *@
+<div class="modal modal-lg fade modal-dialog-scrollable" id="ViewPaymentInfoForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body Myform">
+                @* View payment info Form *@
+                <div class="m-2 justify-content-center align-items-center">
+                    <form class="didact-gothic-regular text-center">
+                        <div class="col">
+                            <span class="text-warning fw-bold fs-5">Food</span> <span class="fw-bold fs-5">Store</span>
+                            <br />
+                            <span class="col-12 col-md-9 text-black fs-3">View payment information.</span>
+                            <br />
+                            <br />
+                            <div class="col-12 fs-5 ">
+                                <MudTextField @bind-Value="CardNumber" Label="Account Number" Variant="Variant.Outlined" Class="custom-mudtextfield" Disabled="true"></MudTextField>
+                            </div>
+                            <br />
+                            <div class="col-12 fs-5 ">
+                                <MudTextField @bind-Value="CardHolderName" Label="Card Holder Name" Variant="Variant.Outlined" Class="custom-mudtextfield" Disabled="true"></MudTextField>
+                            </div>
+                            <br />
+                            <MudGrid>
+                                <MudItem xs="6">
+                                    <MudNumericField HideSpinButtons="true" @bind-Value="ExpirationMonth" Label="Expiration Month" Variant="Variant.Outlined" Class="custom-mudtextfield" Disabled="true" />
+                                </MudItem>
+                                <MudItem xs="6">
+                                    <MudNumericField HideSpinButtons="true" @bind-Value="ExpirationYear" Label="Expiration Year" Variant="Variant.Outlined" Class="custom-mudtextfield" Disabled="true" />
+                                </MudItem>
+                            </MudGrid>
+                            <br />
+                            <div class="col-4 fs-5 ">
+                                <MudNumericField HideSpinButtons="true" @bind-Value="CVV" Label="CVV" Variant="Variant.Outlined" Class="custom-mudtextfield" Disabled="true" />
+                            </div>
+                            <br />
+                        </div>
+                        <br />
+                        <button type="button" class="btn btn-primary col-3" data-bs-dismiss="modal">Close</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@* View Full Order History  Modal *@
+<div class="modal modal-lg fade modal-dialog-scrollable" id="ViewFullOrderHistory" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body Myform text-center">
+                <span class="text-warning fw-bold fs-5 text-center">Food</span> <span class="fw-bold fs-5 text-center">Store</span>
+                <br />
+                <span class="col-12 col-md-9 text-black fs-3 text-center">Your Full Order History.</span>
+                @* Order History Table*@
+                <MudTable Items="@Orders.Take(25)" Hover="true" Breakpoint="Breakpoint.Sm" LoadingProgressColor="Color.Info" Class="text-center">
+                    <HeaderContent>
+                        <MudTh>Order ID</MudTh>
+                        <MudTh>Transaction ID</MudTh>
+                        <MudTh>Order Date </MudTh>
+                        <MudTh>Food Item </MudTh>
+                        <MudTh>Restaurant</MudTh>
+                        <MudTh>Quantity  </MudTh>
+                        <MudTh>Amount </MudTh>
+                    </HeaderContent>
+                    <RowTemplate>
+                        <MudTd DataLabel="Order ID">@context.OrderId</MudTd>
+                        <MudTd DataLabel="Order ID">@context.TransactionId</MudTd>
+                        <MudTd DataLabel="Order Date">@context.OrderDate.ToString("yyyy-MM-dd HH:mm")</MudTd>
+                        <MudTd DataLabel="Food Item">@context.FoodItem</MudTd>
+                        <MudTd DataLabel="Restaurant">@context.RestaurantName</MudTd>
+                        <MudTd DataLabel="Quantity">@context.Quantity</MudTd>
+                        <MudTd DataLabel="Amount">@context.Amount</MudTd>
+                    </RowTemplate>
+                </MudTable>
+                <div class="text-center">
+                    <br />
+                    <br />
+                    <button type="button" class="btn btn-primary col-3" data-bs-dismiss="modal">Close</button>
+                    <br />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* View Full Transaction History  Modal *@
+<div class="modal modal-lg fade modal-dialog-scrollable" id="ViewFullTransactionHistory" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body Myform text-center">
+                <span class="text-warning fw-bold fs-5 text-center">Food</span> <span class="fw-bold fs-5 text-center">Store</span>
+                <br />
+                <span class="col-12 col-md-9 text-black fs-3 text-center">Your Full Transaction History.</span>
+                @* Transaction History Table*@
+                <MudTable Items="@Transactions" Hover="true" Breakpoint="Breakpoint.Sm" LoadingProgressColor="Color.Info" Class="text-center">
+                    <HeaderContent>
+                        <MudTh>Transaction ID</MudTh>
+                        <MudTh>Transaction Date</MudTh>
+                        <MudTh>Food Item</MudTh>
+                        <MudTh>Amount</MudTh>
+                        <MudTh>Restaurant</MudTh>
+                    </HeaderContent>
+                    <RowTemplate>
+                        <MudTd DataLabel="Transaction ID">@context.TransactionId</MudTd>
+                        <MudTd DataLabel="Transaction Date">@context.TransactionDate.ToString("yyyy-MM-dd HH:mm")</MudTd>
+                        <MudTd DataLabel="Payment Method">@context.FoodItem</MudTd>
+                        <MudTd DataLabel="Amount">@context.Amount.ToString("C")</MudTd>
+                        <MudTd DataLabel="Restaurant">@context.RestaurantName</MudTd>
+                    </RowTemplate>
+                </MudTable>
+                <div class="text-center">
+                    <br />
+                    <br />
+                    <button type="button" class="btn btn-primary col-3" data-bs-dismiss="modal">Close</button>
+                    <br />
+                </div>
             </div>
         </div>
     </div>
@@ -396,14 +581,12 @@
     public string? PhoneNumber { get; set; } = "0755658770";
     public string? Address { get; set; } = "No.12, Kandy Road, Kandy";
 
-    public Int128? CardNumber { get; set; }
-    public string? CardHolderName { get; set; }
-    public int? ExpirationMonth { get; set; }
-    public int? ExpirationYear { get; set; }
-    public int? CVV { get; set; }
+    public Int128? CardNumber { get; set; } = 1111222233334444;
+    public string? CardHolderName { get; set; } = "Saviska Jayawickrama";
+    public int? ExpirationMonth { get; set; } = 05;
+    public int? ExpirationYear { get; set; } = 2028;
+    public int? CVV { get; set; } = 234;
 
-
-    string country = "Sri Lanka";
 
 
 }
@@ -413,14 +596,60 @@
 @code {
     private List<TransactionHistory> Transactions = new List<TransactionHistory>
     {
-        new TransactionHistory { TransactionId = 1, TransactionDate = new DateTime(2024, 1, 15, 18, 30, 0), TransactionType = "Order", Amount = 25.50m, PaymentMethod = "Credit Card", Status = "Completed", OrderId = "ORD123456", RestaurantName = "Pizza Hut", PromoCode = "PIZZA10" },
-        new TransactionHistory { TransactionId = 2, TransactionDate = new DateTime(2024, 1, 16, 14, 00, 0), TransactionType = "Order", Amount = 12.75m, PaymentMethod = "PayPal", Status = "Completed", OrderId = "ORD123457", RestaurantName = "Subway", PromoCode = "SUBWAY20" },
-        new TransactionHistory { TransactionId = 3, TransactionDate = new DateTime(2024, 1, 20, 19, 45, 0), TransactionType = "Refund", Amount = -5.00m, PaymentMethod = "Wallet", Status = "Completed", OrderId = "ORD123458", RestaurantName = "McDonald's", PromoCode = "" },
-        new TransactionHistory { TransactionId = 4, TransactionDate = new DateTime(2024, 2, 10, 21, 30, 0), TransactionType = "Order", Amount = 18.40m, PaymentMethod = "Credit Card", Status = "Completed", OrderId = "ORD123459", RestaurantName = "KFC", PromoCode = "KFC50" },
-        new TransactionHistory { TransactionId = 5, TransactionDate = new DateTime(2024, 2, 15, 16, 00, 0), TransactionType = "Order", Amount = 22.00m, PaymentMethod = "Credit Card", Status = "Failed", OrderId = "ORD123460", RestaurantName = "Burger King", PromoCode = "" },
-        new TransactionHistory { TransactionId = 6, TransactionDate = new DateTime(2024, 2, 25, 13, 30, 0), TransactionType = "Order", Amount = 30.00m, PaymentMethod = "Wallet", Status = "Completed", OrderId = "ORD123461", RestaurantName = "Domino's Pizza", PromoCode = "DOMINO10" },
-        new TransactionHistory { TransactionId = 7, TransactionDate = new DateTime(2024, 3, 5, 11, 00, 0), TransactionType = "Order", Amount = 15.20m, PaymentMethod = "PayPal", Status = "Completed", OrderId = "ORD123462", RestaurantName = "Taco Bell", PromoCode = "" },
-        new TransactionHistory { TransactionId = 8, TransactionDate = new DateTime(2024, 3, 15, 17, 45, 0), TransactionType = "Refund", Amount = -10.00m, PaymentMethod = "Credit Card", Status = "Completed", OrderId = "ORD123463", RestaurantName = "Starbucks", PromoCode = "" },
+    new TransactionHistory { TransactionId = 1, TransactionDate = DateTime.Parse("2023-11-01"), FoodItem = "Burger", Amount = 8.99m, PaymentMethod = "Online Card Payment", RestaurantName = "Burger King" },
+    new TransactionHistory { TransactionId = 2, TransactionDate = DateTime.Parse("2023-11-02"), FoodItem = "Pizza", Amount = 12.99m, PaymentMethod = "Cash On Delivery", RestaurantName = "Domino's" },
+    new TransactionHistory { TransactionId = 3, TransactionDate = DateTime.Parse("2023-11-03"), FoodItem = "Pasta", Amount = 9.49m, PaymentMethod = "Online Card Payment", RestaurantName = "Olive Garden" },
+    new TransactionHistory { TransactionId = 4, TransactionDate = DateTime.Parse("2023-11-04"), FoodItem = "Sushi", Amount = 15.99m, PaymentMethod = "Cash On Delivery", RestaurantName = "Sushi Express" },
+    new TransactionHistory { TransactionId = 5, TransactionDate = DateTime.Parse("2023-11-05"), FoodItem = "Salad", Amount = 7.99m, PaymentMethod = "Online Card Payment", RestaurantName = "Fresh Greens" },
+    new TransactionHistory { TransactionId = 6, TransactionDate = DateTime.Parse("2023-11-06"), FoodItem = "Tacos", Amount = 10.99m, PaymentMethod = "Cash On Delivery", RestaurantName = "Taco Bell" },
+    new TransactionHistory { TransactionId = 7, TransactionDate = DateTime.Parse("2023-11-07"), FoodItem = "Fried Chicken", Amount = 11.99m, PaymentMethod = "Online Card Payment", RestaurantName = "KFC" },
+    new TransactionHistory { TransactionId = 8, TransactionDate = DateTime.Parse("2023-11-08"), FoodItem = "Sub Sandwich", Amount = 6.99m, PaymentMethod = "Cash On Delivery", RestaurantName = "Subway" },
+    new TransactionHistory { TransactionId = 9, TransactionDate = DateTime.Parse("2023-11-09"), FoodItem = "Donuts", Amount = 5.99m, PaymentMethod = "Online Card Payment", RestaurantName = "Dunkin'" },
+    new TransactionHistory { TransactionId = 10, TransactionDate = DateTime.Parse("2023-11-10"), FoodItem = "Burrito", Amount = 9.49m, PaymentMethod = "Cash On Delivery", RestaurantName = "Chipotle" },
+    new TransactionHistory { TransactionId = 11, TransactionDate = DateTime.Parse("2023-11-11"), FoodItem = "Ice Cream", Amount = 4.49m, PaymentMethod = "Online Card Payment", RestaurantName = "Baskin Robbins" },
+    new TransactionHistory { TransactionId = 12, TransactionDate = DateTime.Parse("2023-11-12"), FoodItem = "Steak", Amount = 19.99m, PaymentMethod = "Cash On Delivery", RestaurantName = "Outback Steakhouse" },
+    new TransactionHistory { TransactionId = 13, TransactionDate = DateTime.Parse("2023-11-13"), FoodItem = "Wings", Amount = 8.49m, PaymentMethod = "Online Card Payment", RestaurantName = "Wingstop" },
+    new TransactionHistory { TransactionId = 14, TransactionDate = DateTime.Parse("2023-11-14"), FoodItem = "Smoothie", Amount = 5.99m, PaymentMethod = "Cash On Delivery", RestaurantName = "Jamba Juice" },
+    new TransactionHistory { TransactionId = 15, TransactionDate = DateTime.Parse("2023-11-15"), FoodItem = "Pancakes", Amount = 7.99m, PaymentMethod = "Online Card Payment", RestaurantName = "IHOP" },
+    new TransactionHistory { TransactionId = 16, TransactionDate = DateTime.Parse("2023-11-16"), FoodItem = "BBQ Ribs", Amount = 14.99m, PaymentMethod = "Cash On Delivery", RestaurantName = "Texas Roadhouse" },
+    new TransactionHistory { TransactionId = 17, TransactionDate = DateTime.Parse("2023-11-17"), FoodItem = "Spaghetti", Amount = 10.49m, PaymentMethod = "Online Card Payment", RestaurantName = "Italiano's" },
+    new TransactionHistory { TransactionId = 18, TransactionDate = DateTime.Parse("2023-11-18"), FoodItem = "Hot Dog", Amount = 3.99m, PaymentMethod = "Cash On Delivery", RestaurantName = "Nathan's" },
+    new TransactionHistory { TransactionId = 19, TransactionDate = DateTime.Parse("2023-11-19"), FoodItem = "Fish & Chips", Amount = 12.49m, PaymentMethod = "Online Card Payment", RestaurantName = "Seafood Shack" },
+    new TransactionHistory { TransactionId = 20, TransactionDate = DateTime.Parse("2023-11-20"), FoodItem = "Crepes", Amount = 6.99m, PaymentMethod = "Cash On Delivery", RestaurantName = "Crepe Cafe" },
+    new TransactionHistory { TransactionId = 21, TransactionDate = DateTime.Parse("2023-11-21"), FoodItem = "Dim Sum", Amount = 9.99m, PaymentMethod = "Online Card Payment", RestaurantName = "Dim Sum Delight" },
+    new TransactionHistory { TransactionId = 22, TransactionDate = DateTime.Parse("2023-11-22"), FoodItem = "Kebab", Amount = 11.49m, PaymentMethod = "Cash On Delivery", RestaurantName = "Kebab King" },
+    new TransactionHistory { TransactionId = 23, TransactionDate = DateTime.Parse("2023-11-23"), FoodItem = "Gyro", Amount = 8.99m, PaymentMethod = "Online Card Payment", RestaurantName = "Greek House" },
+    new TransactionHistory { TransactionId = 24, TransactionDate = DateTime.Parse("2023-11-24"), FoodItem = "Pad Thai", Amount = 10.49m, PaymentMethod = "Cash On Delivery", RestaurantName = "Thai Express" },
+    new TransactionHistory { TransactionId = 25, TransactionDate = DateTime.Parse("2023-11-25"), FoodItem = "Falafel", Amount = 7.49m, PaymentMethod = "Online Card Payment", RestaurantName = "Mediterranean Grill" },
+    };
+
+    private List<OrderHistory> Orders = new List<OrderHistory>
+    {
+    new OrderHistory { OrderId = 1, TransactionId = 1, OrderDate = DateTime.Parse("2023-11-01"), FoodItem = "Burger", RestaurantName = "Burger King", Quantity = 1, Amount = 8.99m },
+    new OrderHistory { OrderId = 2, TransactionId = 2, OrderDate = DateTime.Parse("2023-11-02"), FoodItem = "Pizza", RestaurantName = "Domino's", Quantity = 1, Amount = 12.99m },
+    new OrderHistory { OrderId = 3, TransactionId = 3, OrderDate = DateTime.Parse("2023-11-03"), FoodItem = "Pasta", RestaurantName = "Olive Garden", Quantity = 1, Amount = 9.49m },
+    new OrderHistory { OrderId = 4, TransactionId = 4, OrderDate = DateTime.Parse("2023-11-04"), FoodItem = "Sushi", RestaurantName = "Sushi Express", Quantity = 1, Amount = 15.99m },
+    new OrderHistory { OrderId = 5, TransactionId = 5, OrderDate = DateTime.Parse("2023-11-05"), FoodItem = "Salad", RestaurantName = "Fresh Greens", Quantity = 1, Amount = 7.99m },
+    new OrderHistory { OrderId = 6, TransactionId = 6, OrderDate = DateTime.Parse("2023-11-06"), FoodItem = "Tacos", RestaurantName = "Taco Bell", Quantity = 2, Amount = 21.98m },
+    new OrderHistory { OrderId = 7, TransactionId = 7, OrderDate = DateTime.Parse("2023-11-07"), FoodItem = "Fried Chicken", RestaurantName = "KFC", Quantity = 1, Amount = 11.99m },
+    new OrderHistory { OrderId = 8, TransactionId = 8, OrderDate = DateTime.Parse("2023-11-08"), FoodItem = "Sub Sandwich", RestaurantName = "Subway", Quantity = 1, Amount = 6.99m },
+    new OrderHistory { OrderId = 9, TransactionId = 9, OrderDate = DateTime.Parse("2023-11-09"), FoodItem = "Donuts", RestaurantName = "Dunkin'", Quantity = 2, Amount = 11.98m },
+    new OrderHistory { OrderId = 10, TransactionId = 10, OrderDate = DateTime.Parse("2023-11-10"), FoodItem = "Burrito", RestaurantName = "Chipotle", Quantity = 1, Amount = 9.49m },
+    new OrderHistory { OrderId = 11, TransactionId = 11, OrderDate = DateTime.Parse("2023-11-11"), FoodItem = "Ice Cream", RestaurantName = "Baskin Robbins", Quantity = 2, Amount = 8.98m },
+    new OrderHistory { OrderId = 12, TransactionId = 12, OrderDate = DateTime.Parse("2023-11-12"), FoodItem = "Steak", RestaurantName = "Outback Steakhouse", Quantity = 1, Amount = 19.99m },
+    new OrderHistory { OrderId = 13, TransactionId = 13, OrderDate = DateTime.Parse("2023-11-13"), FoodItem = "Wings", RestaurantName = "Wingstop", Quantity = 1, Amount = 8.49m },
+    new OrderHistory { OrderId = 14, TransactionId = 14, OrderDate = DateTime.Parse("2023-11-14"), FoodItem = "Smoothie", RestaurantName = "Jamba Juice", Quantity = 2, Amount = 11.98m },
+    new OrderHistory { OrderId = 15, TransactionId = 15, OrderDate = DateTime.Parse("2023-11-15"), FoodItem = "Pancakes", RestaurantName = "IHOP", Quantity = 1, Amount = 7.99m },
+    new OrderHistory { OrderId = 16, TransactionId = 16, OrderDate = DateTime.Parse("2023-11-16"), FoodItem = "BBQ Ribs", RestaurantName = "Texas Roadhouse", Quantity = 1, Amount = 14.99m },
+    new OrderHistory { OrderId = 17, TransactionId = 17, OrderDate = DateTime.Parse("2023-11-17"), FoodItem = "Spaghetti", RestaurantName = "Italiano's", Quantity = 2, Amount = 20.98m },
+    new OrderHistory { OrderId = 18, TransactionId = 18, OrderDate = DateTime.Parse("2023-11-18"), FoodItem = "Hot Dog", RestaurantName = "Nathan's", Quantity = 1, Amount = 3.99m },
+    new OrderHistory { OrderId = 19, TransactionId = 19, OrderDate = DateTime.Parse("2023-11-19"), FoodItem = "Fish & Chips", RestaurantName = "Seafood Shack", Quantity = 1, Amount = 12.49m },
+    new OrderHistory { OrderId = 20, TransactionId = 20, OrderDate = DateTime.Parse("2023-11-20"), FoodItem = "Crepes", RestaurantName = "Crepe Cafe", Quantity = 2, Amount = 13.98m },
+    new OrderHistory { OrderId = 21, TransactionId = 21, OrderDate = DateTime.Parse("2023-11-21"), FoodItem = "Dim Sum", RestaurantName = "Dim Sum Delight", Quantity = 1, Amount = 9.99m },
+    new OrderHistory { OrderId = 22, TransactionId = 22, OrderDate = DateTime.Parse("2023-11-22"), FoodItem = "Kebab", RestaurantName = "Kebab King", Quantity = 2, Amount = 22.98m },
+    new OrderHistory { OrderId = 23, TransactionId = 23, OrderDate = DateTime.Parse("2023-11-23"), FoodItem = "Gyro", RestaurantName = "Greek House", Quantity = 1, Amount = 8.99m },
+    new OrderHistory { OrderId = 24, TransactionId = 24, OrderDate = DateTime.Parse("2023-11-24"), FoodItem = "Pad Thai", RestaurantName = "Thai Express", Quantity = 1, Amount = 10.49m },
+    new OrderHistory { OrderId = 25, TransactionId = 25, OrderDate = DateTime.Parse("2023-11-25"), FoodItem = "Falafel", RestaurantName = "Mediterranean Grill", Quantity = 2, Amount = 14.98m },
     };
 
 }

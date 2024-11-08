@@ -127,7 +127,7 @@
                         <p class="fw-bold text-start">Notes</p>
                         <ul class="d-flex justify-content-between align-items-center">
                             <li></li>
-                            <button type="button" class="btn btn-primary myEditBtn"><MudIcon Icon="@Icons.Material.Filled.Edit" Color="@Color.Dark" /></button>
+                            <button type="button" class="btn btn-primary myEditBtn" data-bs-toggle="modal" data-bs-target="#UpdateNoteForm"><MudIcon Icon="@Icons.Material.Filled.Edit" Color="@Color.Dark" /></button>
                         </ul>
                     </ul>
                     <p><i>Please note, I have a peanut allergy. Make sure no peanuts or peanut oil are used.</i></p>
@@ -184,12 +184,21 @@
                     <li>No. 12, Kandy Road, Kandy</li>
                 </ul>
             </li>
+                <li class="list-group-item m-3">
+                    @* No payment info part *@
+                    <ul class="d-flex justify-content-between align-items-center mb-6">
+                        <li> <b>No Payment Information</b> </li>
+                        <li>
+                            <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg fs-5" data-bs-toggle="modal" data-bs-target="#AddPaymentInfoForm">Add</button>
+                        </li>
+                    </ul>
+                </li>
             <li class="list-group-item m-3">
                 <ul class="d-flex justify-content-between align-items-center mb-3">
                     <p class="fw-bold text-start">Payment Information</p>
                     <ul class="d-flex justify-content-between align-items-center">
                         <li></li>
-                            <button type="button" class="btn btn-primary myEditBtn"><MudIcon Icon="@Icons.Material.Filled.Edit" Color="@Color.Dark" /></button>
+                            <button type="button" class="btn btn-primary myEditBtn" data-bs-toggle="modal" data-bs-target="#UpdatePaymentInfoForm"><MudIcon Icon="@Icons.Material.Filled.Edit" Color="@Color.Dark" /></button>
                         </ul>
                 </ul>
                 <div class="d-flex justify-content-between align-items-center">
@@ -202,7 +211,6 @@
         </ul>
     </div>
 </div>
-
 </div>
 
 @* Edit User Info Modal *@
@@ -222,10 +230,6 @@
                             </div>
                             <br />
                             <div class="col-12 fs-5 ">
-                                <MudTextField @bind-Value="EmailAddress" Label="Email Address" Variant="Variant.Outlined" Class="custom-mudtextfield"></MudTextField>
-                            </div>
-                            <br />
-                            <div class="col-12 fs-5 ">
                                 <MudTextField @bind-Value="PhoneNumber" Label="Phone Number" Variant="Variant.Outlined" Class="custom-mudtextfield"></MudTextField>
                             </div>
                             <br />
@@ -234,22 +238,168 @@
                             </div>
                             <br />
                         </div>
+                        <button type="button" class="btn btn-primary col-6">Update</button>
+                        <br />
+                        <br />
+                        <button type="button" class="btn btn-outline-secondary col-3" data-bs-dismiss="modal">Cancel</button>
                     </form>
                 </div>
-            </div>
-            <div class="modal-footer text-center">
-                <button type="button" class="btn btn-outline-secondary col-3" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary col-5">Update</button>
             </div>
         </div>
     </div>
 </div>
+
+
+
+@* Add payment info Modal *@
+<div class="modal modal-lg fade modal-dialog-scrollable" id="AddPaymentInfoForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body Myform">
+                @* Add payment info Form *@
+                <div class="m-2 justify-content-center align-items-center">
+                    <form class="didact-gothic-regular text-center">
+                        <div class="col">
+                            <span class="text-warning fw-bold fs-5">Food</span> <span class="fw-bold fs-5">Store</span>
+                            <br />
+                            <span class="col-12 col-md-9 text-black fs-3">Add payment information.</span>
+                            <br />
+                            <br />
+                            <div class="col-12 fs-5 ">
+                                <MudTextField @bind-Value="CardNumber" Label="Account Number" Variant="Variant.Outlined" Class="custom-mudtextfield"></MudTextField>
+                            </div>
+                            <br />
+                            <div class="col-12 fs-5 ">
+                                <MudTextField @bind-Value="CardHolderName" Label="Card Holder Name" Variant="Variant.Outlined" Class="custom-mudtextfield"></MudTextField>
+                            </div>
+                            <br />
+                            <MudGrid>
+                                <MudItem xs="6">
+                                    <MudNumericField HideSpinButtons="true" @bind-Value="ExpirationMonth" Label="Expiration Month" Variant="Variant.Outlined" Class="custom-mudtextfield" />
+                                </MudItem>
+                                <MudItem xs="6">
+                                    <MudNumericField HideSpinButtons="true" @bind-Value="ExpirationYear" Label="Expiration Year" Variant="Variant.Outlined" Class="custom-mudtextfield" />
+                                </MudItem>
+                            </MudGrid>
+                            <br />
+                            <div class="col-4 fs-5 ">
+                                <MudNumericField HideSpinButtons="true" @bind-Value="CVV" Label="CVV" Variant="Variant.Outlined" Class="custom-mudtextfield" />
+                            </div>
+                            <br />
+                        </div>
+                        <button type="button" class="btn btn-primary col-5">Save</button>
+                        <br />
+                        <br />
+                        <button type="button" class="btn btn-outline-secondary col-3" data-bs-dismiss="modal">Cancel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@* Update payment info Modal *@
+<div class="modal modal-lg fade modal-dialog-scrollable" id="UpdatePaymentInfoForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body Myform">
+                @* Update payment info Form *@
+                <div class="m-2 justify-content-center align-items-center">
+                    <form class="didact-gothic-regular text-center">
+                        <div class="col">
+                            <span class="text-warning fw-bold fs-5">Food</span> <span class="fw-bold fs-5">Store</span>
+                            <br />
+                            <span class="col-12 col-md-9 text-black fs-3">Update payment information.</span>
+                            <br />
+                            <br />
+                            <div class="col-12 fs-5 ">
+                                <MudTextField @bind-Value="CardNumber" Label="Account Number" Variant="Variant.Outlined" Class="custom-mudtextfield"></MudTextField>
+                            </div>
+                            <br />
+                            <div class="col-12 fs-5 ">
+                                <MudTextField @bind-Value="CardHolderName" Label="Card Holder Name" Variant="Variant.Outlined" Class="custom-mudtextfield"></MudTextField>
+                            </div>
+                            <br />
+                            <MudGrid>
+                                <MudItem xs="6">
+                                    <MudNumericField HideSpinButtons="true" @bind-Value="ExpirationMonth" Label="Expiration Month" Variant="Variant.Outlined" Class="custom-mudtextfield" />
+                                </MudItem>
+                                <MudItem xs="6">
+                                    <MudNumericField HideSpinButtons="true" @bind-Value="ExpirationYear" Label="Expiration Year" Variant="Variant.Outlined" Class="custom-mudtextfield" />
+                                </MudItem>
+                            </MudGrid>
+                            <br />
+                            <div class="col-4 fs-5 ">
+                                <MudNumericField HideSpinButtons="true" @bind-Value="CVV" Label="CVV" Variant="Variant.Outlined" Class="custom-mudtextfield" />
+                            </div>
+                            <br />
+                        </div>
+                    </form>
+                    <div class="text-center">
+                        <button type="button" class="btn btn-primary col-5">Save</button>
+                        <br />
+                        <br />
+                        <button type="button" class="btn btn-outline-secondary col-3" data-bs-dismiss="modal">Cancel</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@* Update note Modal *@
+<div class="modal modal-lg fade modal-dialog-scrollable" id="UpdateNoteForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body Myform">
+                @* Update payment info Form *@
+                <div class="m-2 justify-content-center align-items-center">
+                    <form class="didact-gothic-regular text-center">
+                        <div class="col">
+                            <span class="text-warning fw-bold fs-5">Food</span> <span class="fw-bold fs-5">Store</span>
+                            <br />
+                            <span class="col-12 col-md-9 text-black fs-3">Update your note.</span>
+                            <br />
+                            <br />
+                            <div class="col-12 fs-5 ">
+                                <MudTextField @bind-Value="MyNote" Label="Update Your Note" Lines="5" Variant="Variant.Outlined" Class="custom-mudtextfield"></MudTextField>
+                            </div>
+                            <br />
+                            </div>
+                    </form>
+                    <div class="text-center">
+                        <button type="button" class="btn btn-primary col-5">Update</button>
+                        <br />
+                        <br />
+                        <button type="button" class="btn btn-outline-secondary col-3" data-bs-dismiss="modal">Cancel</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 @code {
     public string? Name { get; set; } = "Saviska";
     public string? EmailAddress { get; set; } = "Saviska@ASNIT.LK";
     public string? PhoneNumber { get; set; } = "0755658770";
     public string? Address { get; set; } = "No.12, Kandy Road, Kandy";
+
+
+    public string? MyNote { get; set; } = "Please note, I have a peanut allergy. Make sure no peanuts or peanut oil are used.";
+
+
+    public Int128? CardNumber { get; set; } = 1111222233334444;
+    public string? CardHolderName { get; set; } = "Saviska Jayawickrama";
+    public int? ExpirationMonth { get; set; } = 05;
+    public int? ExpirationYear { get; set; } = 2028;
+    public int? CVV { get; set; } = 234;
+
 }
 
 
